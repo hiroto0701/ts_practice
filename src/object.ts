@@ -76,6 +76,7 @@ type Family<Parent, Child> = {
   son: Child;
 };
 
+// 3.4.2 型引数を持つ型を使用する
 const obj: Family<number, string> = {
   mother: 35,
   father: 30,
