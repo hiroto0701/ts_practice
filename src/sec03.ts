@@ -70,15 +70,39 @@ console.log(message);
 // };
 
 // 3.4.1 型引数を持つ型を宣言
-type Family<Parent, Child> = {
-  mother: Parent;
-  father: Parent;
-  son: Child;
-};
+// type Family<Parent, Child> = {
+//   mother: Parent;
+//   father: Parent;
+//   son: Child;
+// };
 
 // 3.4.2 型引数を持つ型を使用する
-const obj: Family<number, string> = {
-  mother: 35,
-  father: 30,
-  son: "I'm a boy."
-};
+// const obj: Family<number, string> = {
+//   mother: 35,
+//   father: 30,
+//   son: "I'm a boy."
+// };
+
+// 3.4.3 部分型関係による型引数の制約
+// type文において型引数を宣言するときextendsという構文を使うことができる。
+// この構文は「この型引数は常に型の部分型でなければならない」という制約（constraint）を意味する
+// type HasName = {
+//   name: string;
+// };
+// type Family<Parent extends HasName, Child extends HasName> = {
+//   mother: Parent;
+//   father: Parent;
+//   son: Child;
+// }
+
+// 以下の場合 number や string は HasName の部分型ではないためエラーとなる
+// type Example = Family<number, string>
+// error TS2344: Type 'number' does not satisfy the constraint 'HasName'.
+
+// extendsの右側に書く制約には他の型引数を使うこともできる
+// 次の例ではParentに渡される型はHasNameの部分型でなくてはならず、ChildはさらにParentの部分型でなければいけません。
+// type Family<Parent extends HasName, Child extends Parent> = {
+//   mother: Parent;
+//   father: Parent;
+//   son: Child;
+// };
