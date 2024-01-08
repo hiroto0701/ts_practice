@@ -1,7 +1,7 @@
 "use strict";
 const message = "Hello, World!";
 console.log(message);
-// object
+/* 3.4 オブジェクト */
 // const fooObj : {
 //   name: string;
 //   age: number;
@@ -92,3 +92,21 @@ console.log(message);
 //   father: Parent;
 //   son: Child;
 // };
+// // 3.4.4 オプショナルな型引数
+// // 型引数の宣言時には省略可能な型引数を取ることができる
+// // そのためには型引数の後ろに = 型名 とし、この型が省略された時のデフォルト値として扱われる。
+// type Animal = {
+//   name: string;
+// };
+// type Family<Parent = Animal, Child = Animal> = {
+//   mother: Parent;
+//   father: Parent;
+//   son: Child;
+// }
+// // 上記の例ではFamilyの型引数である ParentとChildはオプショナルな型引数です。
+// // 通常通りの使い方
+// type S = Family<string, string>;
+// // Tは Family<Animal, Animal> と同義
+// type T = Family;
+// // Uは Family<string, Animal> と同義
+// type U = Family<string>;
