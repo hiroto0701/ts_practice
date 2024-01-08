@@ -127,3 +127,29 @@ console.log(message);
 
 // // Uは Family<string, Animal> と同義
 // type U = Family<string>;
+
+
+
+/* 3.5 配列 */
+// スプレッド構文使ってみよ
+// const arr1 = [4, 5, 6];
+// const arr2 = [1, 2, 3, ...arr1];
+// console.log(arr2);
+
+// /* 3.5.1 配列型の記法 */
+// // OK
+// const arr: number[] = [1, 10, 100];
+
+// // NG
+// const arr2: string[] = [1, 10, 100];
+
+// 記述法には種類がある。
+// T[] or Array<T> （ジェネリック型）
+const arr1: boolean[] = [true, false];
+const arr2: Array<{
+  name: string;
+}> = [
+  { 'name': "田中" },
+  { 'name': "山田" },
+  { 'name': "稲垣" },
+];
