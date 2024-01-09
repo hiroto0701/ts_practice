@@ -210,6 +210,7 @@
 /* ====================
   3.6分割代入 
 ===================== */
+/* 3.6.1 基本的なパターン */
 // ES2015 で登場
 // オブジェクトから値を取り出して変数代入するという操作を簡単に書けるようになった
 // オブジェクトの場合
@@ -248,3 +249,22 @@
 //   num: 1234,
 // };
 // const { foo } = obj; // error TS2339: Property 'foo' does not exist on type '{ str: string; num: number; }'.
+
+/* ネストしたパターン */
+// ネストした場合でも基本的に同じ
+const nested = {
+  num: 123,
+  str: "string",
+  obj: {
+    foo: "hello",
+    bar: "world",
+  }
+};
+const { num, obj } = nested;
+console.log(num);
+console.log(obj.foo);
+console.log(obj.bar);
+// 同じ意味になる
+const { obj: { foo, bar } } = nested;
+console.log(foo);
+console.log(bar);

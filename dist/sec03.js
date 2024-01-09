@@ -178,33 +178,56 @@
 /* ====================
   3.6分割代入
 ===================== */
+/* 3.6.1 基本的なパターン */
 // ES2015 で登場
 // オブジェクトから値を取り出して変数代入するという操作を簡単に書けるようになった
 // オブジェクトの場合
-const item = {
-    price: 100,
-    shape: 'circle',
+// const item = {
+//   price: 100,
+//   shape: 'circle', 
+// }
+// const { price, shape } = item;
+// // const price = item.price;
+// // const shape = item.shape;
+// console.log(price, shape);
+// // 配列の場合
+// const arr = [1, 10, 100];
+// const[a, b, c] = arr;
+// console.log(a, b, c);
+// // 変数名をプロパティ名と別にしたい場合 => プロパティ名: 変数名 で定義する
+// const color = {
+//   r: 0,
+//   g: 100,
+//   b: 38,
+//   a: 0.5
+// };
+// const {
+//   r,
+//   g: green,
+//   b: hogehoge,
+//   a: fugafuga,
+// } = color;
+// console.log(r, green, hogehoge, fugafuga);
+// // 存在しないプロパティにアクセスすればエラーになる
+// const obj = {
+//   str: "Hello, world!",
+//   num: 1234,
+// };
+// const { foo } = obj; // error TS2339: Property 'foo' does not exist on type '{ str: string; num: number; }'.
+/* ネストしたパターン */
+// ネストした場合でも基本的に同じ
+const nested = {
+    num: 123,
+    str: "string",
+    obj: {
+        foo: "hello",
+        bar: "world",
+    }
 };
-const { price, shape } = item;
-// const price = item.price;
-// const shape = item.shape;
-console.log(price, shape);
-// 配列の場合
-const arr = [1, 10, 100];
-const [a, b, c] = arr;
-console.log(a, b, c);
-// 変数名をプロパティ名と別にしたい場合 => プロパティ名: 変数名 で定義する
-const color = {
-    r: 0,
-    g: 100,
-    b: 38,
-    a: 0.5
-};
-const { r, g: green, b: hogehoge, a: fugafuga, } = color;
-console.log(r, green, hogehoge, fugafuga);
-// 存在しないプロパティにアクセスすればエラーになる
-const obj = {
-    str: "Hello, world!",
-    num: 1234,
-};
-const { foo } = obj;
+const { num, obj } = nested;
+console.log(num);
+console.log(obj.foo);
+console.log(obj.bar);
+const { obj: { foo, bar } } = nested;
+console.log(foo);
+console.log(bar);
