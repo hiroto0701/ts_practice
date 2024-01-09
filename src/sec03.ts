@@ -130,7 +130,9 @@
 
 
 
-/* 3.5 配列 */
+/* ====================== 
+3.5 配列 
+====================== */
 // スプレッド構文使ってみよ
 // const arr1 = [4, 5, 6];
 // const arr2 = [1, 2, 3, ...arr1];
@@ -200,6 +202,49 @@
 // ラベル付きタプル型
 // オブジェクトのプロパティみたいに定義できる。分かりやすいという理由以外で使用されない
 // ただし要素へのアクセスは inagaki.name とかはだめ。あくまで配列だから
-type User = [name: string, age: number];
-const inagaki: User =["hiroto", 25];
-console.log(inagaki[0]);
+// type User = [name: string, age: number];
+// const inagaki: User =["hiroto", 25];
+// console.log(inagaki[0]);
+
+
+/* ====================
+  3.6分割代入 
+===================== */
+// ES2015 で登場
+// オブジェクトから値を取り出して変数代入するという操作を簡単に書けるようになった
+// オブジェクトの場合
+// const item = {
+//   price: 100,
+//   shape: 'circle', 
+// }
+// const { price, shape } = item;
+// // const price = item.price;
+// // const shape = item.shape;
+// console.log(price, shape);
+
+// // 配列の場合
+// const arr = [1, 10, 100];
+// const[a, b, c] = arr;
+// console.log(a, b, c);
+
+// // 変数名をプロパティ名と別にしたい場合 => プロパティ名: 変数名 で定義する
+// const color = {
+//   r: 0,
+//   g: 100,
+//   b: 38,
+//   a: 0.5
+// };
+// const {
+//   r,
+//   g: green,
+//   b: hogehoge,
+//   a: fugafuga,
+// } = color;
+// console.log(r, green, hogehoge, fugafuga);
+
+// // 存在しないプロパティにアクセスすればエラーになる
+// const obj = {
+//   str: "Hello, world!",
+//   num: 1234,
+// };
+// const { foo } = obj; // error TS2339: Property 'foo' does not exist on type '{ str: string; num: number; }'.
