@@ -184,3 +184,22 @@
 // for (const elm of test) {
 //   console.log(elm);
 // }
+
+/* 3.5.7 タプル型 */
+// タプル型 => 要素数が固定された型。代わりに配列のそれぞれの要素に異なる型を与えることができる
+// オブジェクトに似ている
+// let tuple: [string, number] = ['hoge', 0];
+// console.log(tuple);
+// tuple = ['bar', 100];
+// console.log(tuple);
+
+// const str = tuple[0];
+// const num = tuple[1];
+// const nothing = tuple[2]; error TS2493: Tuple type '[string, number]' of length '2' has no element at index '2'.
+
+// ラベル付きタプル型
+// オブジェクトのプロパティみたいに定義できる。分かりやすいという理由以外で使用されない
+// ただし要素へのアクセスは inagaki.name とかはだめ。あくまで配列だから
+type User = [name: string, age: number];
+const inagaki: User =["hiroto", 25];
+console.log(inagaki[0]);
