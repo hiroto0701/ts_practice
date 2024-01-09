@@ -166,8 +166,9 @@ console.log(message);
 
 /* 3.5.5 配列の機能を使う */
 // push
-const arr: Array<number> = [1, 10, 100];
-console.log(arr);
-arr.push(1000);
-console.log(arr);
-arr.push('string');
+// const arr: Array<number> = [1, 10, 100];
+// console.log(arr);
+// arr.push(1000);
+// console.log(arr);
+// arr.push('string'); error
+
