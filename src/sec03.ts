@@ -250,21 +250,41 @@
 // };
 // const { foo } = obj; // error TS2339: Property 'foo' does not exist on type '{ str: string; num: number; }'.
 
-/* ネストしたパターン */
+/* 3.6.2 ネストしたパターン */
 // ネストした場合でも基本的に同じ
-const nested = {
-  num: 123,
-  str: "string",
-  obj: {
-    foo: "hello",
-    bar: "world",
-  }
-};
-const { num, obj } = nested;
-console.log(num);
-console.log(obj.foo);
-console.log(obj.bar);
-// 同じ意味になる
-const { obj: { foo, bar } } = nested;
-console.log(foo);
-console.log(bar);
+// const nested = {
+//   num: 123,
+//   str: "string",
+//   obj: {
+//     foo: "hello",
+//     bar: "world",
+//   }
+// };
+// const { num, obj } = nested;
+// console.log(num);
+// console.log(obj.foo);
+// console.log(obj.bar);
+// // 同じ意味になる
+// const { obj: { foo, bar } } = nested;
+// console.log(foo);
+// console.log(bar);
+
+
+/* 3.6.3 配列の分割代入 */
+// const arr: Array<number> = [2, 3, 5, 7, 11];
+// const [first, second, third, fourth] = arr;
+// // 同じ意味
+// // const first = arr[0];
+
+// // 空白を使用して要素をスキップすることもできる
+// const arr2: number[] = [1, 3, 5, 7, 9, 11];
+// const [, foo, , bar, , hoge] = arr2;
+// console.log(foo);
+// console.log(bar);
+// console.log(hoge);
+
+// // タプル型に使用することが多い
+// const me: [string, number] = ["inagaki", 25];
+// const [myName, age] = me;
+// console.log(myName);
+// console.log(age);
