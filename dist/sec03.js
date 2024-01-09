@@ -120,11 +120,28 @@ console.log(message);
 // const arr: number[] = [1, 10, 100];
 // // NG
 // const arr2: string[] = [1, 10, 100];
+/* 3.5.3 配列型の記法 */
 // 記述法には種類がある。
 // T[] or Array<T> （ジェネリック型）
-const arr1 = [true, false];
-const arr2 = [
-    { 'name': "田中" },
-    { 'name': "山田" },
-    { 'name': "稲垣" },
-];
+// 機能に違いはない
+// const arr1: boolean[] = [true, false];
+// const arr2: Array<{
+//   name: string;
+// }> = [
+//   { 'name': "田中" },
+//   { 'name': "山田" },
+//   { 'name': "稲垣" },
+// ];
+/* 3.5.4 readonly配列型 */
+// 内容を書き換えられない配列型
+// 変更する必要がないものは積極的にreadonlyをつけることでエラーを回避する
+// readonly T[] or ReadonlyArray<T> という書き方
+// const arr: readonly number[] = [1, 10, 100];
+// const arr2: ReadonlyArray<string> = ['string', 'example', 'readonly'];
+// arr[1] = -500; error
+/* 3.5.5 配列の機能を使う */
+// push
+const arr = [1, 10, 100];
+console.log(arr);
+arr.push(100);
+console.log(arr);
