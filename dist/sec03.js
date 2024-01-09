@@ -1,6 +1,6 @@
 "use strict";
-const message = "Hello, World!";
-console.log(message);
+// const message: string = "Hello, World!";
+// console.log(message);
 /* 3.4 オブジェクト */
 // const fooObj : {
 //   name: string;
@@ -141,7 +141,19 @@ console.log(message);
 // arr[1] = -500; error
 /* 3.5.5 配列の機能を使う */
 // push
+// const arr: Array<number> = [1, 10, 100];
+// console.log(arr);
+// arr.push(1000);
+// console.log(arr);
+// arr.push('string'); error
+/* 3.5.6 for-of ループ */
+// for (const 変数 of 式) {}
+// phpでいう foreachに似ている
 const arr = [1, 10, 100];
-console.log(arr);
-arr.push(100);
-console.log(arr);
+for (const e of arr) {
+    console.log(e);
+}
+const test = "Hello, world!";
+for (const elm of test) {
+    console.log(elm);
+}
