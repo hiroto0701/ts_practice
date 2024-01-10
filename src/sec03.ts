@@ -288,3 +288,9 @@
 // const [myName, age] = me;
 // console.log(myName);
 // console.log(age);
+
+// 今日は少しすくなめのcommit
+const me: [string, number] = ["hello", 200];
+const [greeting, integer] = me;
+console.log(greeting);
+console.log(integer);
