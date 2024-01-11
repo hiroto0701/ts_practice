@@ -289,8 +289,32 @@
 // console.log(myName);
 // console.log(age);
 
-// 今日は少しすくなめのcommit
-const me: [string, number] = ["hello", 200];
-const [greeting, integer] = me;
-console.log(greeting);
-console.log(integer);
+/* 3.6.4 分割代入のデフォルト値 */
+// 分割代入によって取得しようとしたプロパティの値がundefinedだった時のみにデフォルト値が適用される
+// type Obj = { foo?: number };
+// const obj1: Obj = {};
+// const obj2: Obj = {
+//   foo: -1234,
+// };
+
+// // 変数fooには500が代入される
+// const { foo = 500 } = obj1;
+// console.log(foo);
+
+// // 変数barには-1234が代入される
+// const { foo: bar = 500 } = obj2;
+// console.log(bar);
+
+// // undefined以外には適用されない
+// const obj = { hoge: null };
+// const { hoge = 100 } = obj;
+// console.log(hoge); // nullが代入されている
+
+/* 3.6.5 restパターンでオブジェクトの残りを取得する */
+const obj = {
+  foo: 123,
+  bar: "string",
+  baz: false,
+};
+
+const { foo, ...restObj } = obj; 
