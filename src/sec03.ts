@@ -360,10 +360,18 @@ Taka,35,1
 
 const users: User[] = [];
 const lines = data.split("\n");
+// linesには以下のようなデータが代入される
+// lines[0] = "hiroto,25,1"
+// lines[1] = "John Smith,19,0"
+// lines[2] = "Taka,35,1"
+// lines[3] = ""  // 最後の改行による空の要素
+
 for (const line of lines) {
+  // lines[3]の空の要素をスキップする
   if (line === "") {
     continue;
   }
+
   const [name, ageString, premiumUserString] = line.split(",");
   const age = Number(ageString);
   const premiumUser = premiumUserString === "1";
