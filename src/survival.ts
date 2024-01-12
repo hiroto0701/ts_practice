@@ -39,3 +39,26 @@
 // const isTrue: true = true;
 // const num: 1 | 2 | 3 = 3;
 // const string: "hoge" = "hoge";
+
+/* オブジェクトのプロパティ */
+const obj = {
+  name: "ミネラルウォーター",
+  // キーと値に分けて書いたメソッド定義
+  printHello1: function() {
+    console.log("Hello");
+  },
+  // メソッド定義のショートハンド
+  printHello2() {
+    console.log("Hello");
+  }
+}
+
+// JS,TSではobjectのメソッドとフィールドの区別があいまい
+const calc = {
+  sum(a: number ,b: number): number {
+    return a + b;
+  },
+}
+console.log(calc.sum(1, 5));
+// calc.sum = null;
+calc.sum(1, 5); // 上でnull代入しているからメソッドはnullになってしまっている

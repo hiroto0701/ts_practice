@@ -25,7 +25,32 @@
 // console.log(s1 === s1); // true
 // console.log(s1 === s2); // false
 /* リテラル型 */
-// プリミティブ型の特定の値だけを代入可能にする型。
-let x; // 1以外代入不可
-x = 1; // ok
-x = 100; // NG
+// // プリミティブ型の特定の値だけを代入可能にする型。
+// let x: 1; // 1以外代入不可
+// x = 1; // ok
+// x = 100; // NG Type '100' is not assignable to type '1'.
+// // プリミティブ型なら何でもOK
+// const isTrue: true = true;
+// const num: 1 | 2 | 3 = 3;
+// const string: "hoge" = "hoge";
+/* オブジェクトのプロパティ */
+const obj = {
+    name: "ミネラルウォーター",
+    // キーと値に分けて書いたメソッド定義
+    printHello1: function () {
+        console.log("Hello");
+    },
+    // メソッド定義のショートハンド
+    printHello2() {
+        console.log("Hello");
+    }
+};
+// JS,TSではobjectのメソッドとフィールドの区別があいまい
+const calc = {
+    sum(a, b) {
+        return a + b;
+    },
+};
+console.log(calc.sum(1, 5));
+// calc.sum = null;
+calc.sum(1, 5); // 上でnull代入しているからメソッドはnullになってしまっている
