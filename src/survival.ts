@@ -143,3 +143,22 @@
 // size = {}; // OK
 // size = { width: undefined }; // ok
 // size = { width: null } // ng Type 'null' is not assignable to type 'number | undefined'
+
+/* インデックス型 */
+// オブジェクトが動的に変化し、キーの名前が事前にわからない場合や、キーの名前が柔軟であるべき場合に有用。
+let obj: {
+  [K: string]: number;
+};
+// フィールド名の表現部分が[K: string]です。このKの部分は型変数です。任意の型変数名にできます。Kやkeyにするのが一般的です。
+// stringの部分はフィールド名の型を表します。インデックス型のフィールド名の型はstring、number、symbolのみが指定できます
+obj = {
+  a: 1,
+  b: 2
+} // ok
+
+// インデックス型のオブジェクトであれば、フィールド名が定義されていないプロパティも代入できます
+obj.c = 4; // ok
+obj["d"] = 5; // ok
+
+// Record<K, T> を使っても同じ表現ができる 
+let obj2: Record<string, number>;
