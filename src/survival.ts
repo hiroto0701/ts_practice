@@ -18,7 +18,7 @@
 // // nullは意図的に使わない限りは発生しない。APIの返り値がnullになることはある。
 // // JSON.stringifyでJSON化したときにundefinedは消えるけどnullは値が保持される
 // console.log(JSON.stringify({ foo: undefined }));
-console.log(JSON.stringify({ foo: null }));
+// console.log(JSON.stringify({ foo: null }));
 
 /* symbol型 */
 // // 一意の値を持つ型。
@@ -28,3 +28,14 @@ console.log(JSON.stringify({ foo: null }));
 
 // console.log(s1 === s1); // true
 // console.log(s1 === s2); // false
+
+/* リテラル型 */
+// // プリミティブ型の特定の値だけを代入可能にする型。
+// let x: 1; // 1以外代入不可
+// x = 1; // ok
+// x = 100; // NG Type '100' is not assignable to type '1'.
+
+// // プリミティブ型なら何でもOK
+// const isTrue: true = true;
+// const num: 1 | 2 | 3 = 3;
+// const string: "hoge" = "hoge";
