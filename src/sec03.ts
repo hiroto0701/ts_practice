@@ -311,10 +311,82 @@
 // console.log(hoge); // nullが代入されている
 
 /* 3.6.5 restパターンでオブジェクトの残りを取得する */
-const obj = {
-  foo: 123,
-  bar: "string",
-  baz: false,
-};
+// const obj = {
+//   foo: 123,
+//   bar: "string",
+//   baz: false,
+// };
 
-const { foo, ...restObj } = obj; 
+// const { foo, ...restObj } = obj; 
+
+// console.log(foo);
+// console.log(restObj);
+
+// // 配列も同じ
+// const arr: (string | number | boolean)[] = ["hello", 1, "world", 3, true, "ts", 5, false];
+// const [first, second, third, ...hogehoge] = arr;
+// console.log(first);
+// console.log(second);
+// console.log(third);
+// console.log(hogehoge); 
+
+
+
+/* ====================
+  3.7その他の組み込みオブジェクト 
+===================== */
+/* 3.7.1 Dateオブジェクト */
+const date = new Date();
+console.log(date);
+
+const now = date.getTime();
+console.log(now);
+
+/* ====================
+  3.8力試し
+===================== */
+/* 3.8.1 データ処理 */
+type User = {
+  name: string;
+  age: number;
+  premiumUser: boolean;
+}
+
+const data: string = `
+hiroto,25,1
+John Smith,19,0
+Taka,35,1
+`;
+
+const users: User[] = [];
+const lines = data.split("\n");
+// linesには以下のようなデータが代入される
+// lines[0] = "hiroto,25,1"
+// lines[1] = "John Smith,19,0"
+// lines[2] = "Taka,35,1"
+// lines[3] = ""  // 最後の改行による空の要素
+
+for (const line of lines) {
+  // lines[3]の空の要素をスキップする
+  if (line === "") {
+    continue;
+  }
+
+  const [name, ageString, premiumUserString] = line.split(",");
+  const age = Number(ageString);
+  const premiumUser = premiumUserString === "1";
+
+  users.push({
+    name,
+    age,
+    premiumUser
+  });
+}
+
+for (const user of users) {
+  if (user.premiumUser) {
+    console.log(`${user.name}(${user.age})はプレミアムユーザです。`);
+  } else {
+    console.log(`${user.name}($${user.age})はプレミアムユーザではありません。`)
+  }
+}
