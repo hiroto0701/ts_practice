@@ -107,3 +107,15 @@ obj = {
 };
 // obj.foo = { bar: 1 }; // Cannot assign to 'foo' because it is a read-only property.
 obj.foo.bar = 1; // 入れ子を直接書き換えるのはOK
+// 一括で指定するのもアリ
+let obj2;
+obj2 = {
+    a: 1,
+    b: "hello",
+    c: true,
+};
+/* オブジェクトの型のオプションプロパティ */
+let size;
+size = {}; // OK
+size = { width: undefined }; // ok
+size = { width: null }; // ng

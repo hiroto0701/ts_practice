@@ -111,17 +111,35 @@
 // obj = { foo: 1 };
 // obj.foo = 2; // Cannot assign to 'foo' because it is a read-only property.
 
-// readonlyが指定されたプロパティのみが読み取り専用になる。
-// 入れ子になっている場合、その入れ子までをreadonlyにする機能はない
-let obj: {
-  readonly foo: {
-    bar: number;
-  };
-};
-obj = {
-  foo: {
-    bar: 5,
-  },
-};
-// obj.foo = { bar: 1 }; // Cannot assign to 'foo' because it is a read-only property.
-obj.foo.bar = 1; // 入れ子を直接書き換えるのはOK
+// // readonlyが指定されたプロパティのみが読み取り専用になる。
+// // 入れ子になっている場合、その入れ子までをreadonlyにする機能はない
+// let obj: {
+//   readonly foo: {
+//     bar: number;
+//   };
+// };
+// obj = {
+//   foo: {
+//     bar: 5,
+//   },
+// };
+// // obj.foo = { bar: 1 }; // Cannot assign to 'foo' because it is a read-only property.
+// obj.foo.bar = 1; // 入れ子を直接書き換えるのはOK
+
+// // 一括で指定するのもアリ
+// let obj2: Readonly<{
+//   a: number;
+//   b: string;
+//   c: boolean;
+// }>;
+// obj2 = {
+//   a: 1,
+//   b: "hello",
+//   c: true,
+// }
+
+/* オブジェクトの型のオプションプロパティ */
+// let size: { width?: number };
+// size = {}; // OK
+// size = { width: undefined }; // ok
+// size = { width: null } // ng Type 'null' is not assignable to type 'number | undefined'
