@@ -34,23 +34,48 @@
 // const num: 1 | 2 | 3 = 3;
 // const string: "hoge" = "hoge";
 /* オブジェクトのプロパティ */
-const obj = {
-    name: "ミネラルウォーター",
-    // キーと値に分けて書いたメソッド定義
-    printHello1: function () {
-        console.log("Hello");
-    },
-    // メソッド定義のショートハンド
-    printHello2() {
-        console.log("Hello");
+// const obj = {
+//   name: "ミネラルウォーター",
+//   // キーと値に分けて書いたメソッド定義
+//   printHello1: function() {
+//     console.log("Hello");
+//   },
+//   // メソッド定義のショートハンド
+//   printHello2() {
+//     console.log("Hello");
+//   }
+// }
+// // JS,TSではobjectのメソッドとフィールドの区別があいまい
+// const calc = {
+//   sum(a: number ,b: number): number {
+//     return a + b;
+//   },
+// }
+// console.log(calc.sum(1, 5));
+// // calc.sum = null;
+// calc.sum(1, 5); // 上でnull代入しているからメソッドはnullになってしまっている
+/* オブジェクトの型注釈 */
+const box = {
+    width: 100,
+    height: 500
+};
+const box2 = {
+    width: 2,
+    height: 5
+};
+// メソッドの型注釈
+let calc;
+// これもOK
+let calc2;
+calc = {
+    sum(x, y) {
+        return x + y;
     }
 };
-// JS,TSではobjectのメソッドとフィールドの区別があいまい
-const calc = {
-    sum(a, b) {
-        return a + b;
-    },
+// Record<Key, Type>
+// 連想配列のようなキーバリューのオブジェクトを定義する場合、ユーティリティ型のRecordを使う方法もある
+let foo;
+foo = {
+    a: 1,
+    b: 2
 };
-console.log(calc.sum(1, 5));
-// calc.sum = null;
-calc.sum(1, 5); // 上でnull代入しているからメソッドはnullになってしまっている
