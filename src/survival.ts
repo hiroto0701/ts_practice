@@ -145,20 +145,110 @@
 // size = { width: null } // ng Type 'null' is not assignable to type 'number | undefined'
 
 /* インデックス型 */
-// オブジェクトが動的に変化し、キーの名前が事前にわからない場合や、キーの名前が柔軟であるべき場合に有用。
-let obj: {
-  [K: string]: number;
-};
-// フィールド名の表現部分が[K: string]です。このKの部分は型変数です。任意の型変数名にできます。Kやkeyにするのが一般的です。
-// stringの部分はフィールド名の型を表します。インデックス型のフィールド名の型はstring、number、symbolのみが指定できます
-obj = {
+// // オブジェクトが動的に変化し、キーの名前が事前にわからない場合や、キーの名前が柔軟であるべき場合に有用。
+// let obj: {
+//   [K: string]: number;
+// };
+// // フィールド名の表現部分が[K: string]です。このKの部分は型変数です。任意の型変数名にできます。Kやkeyにするのが一般的です。
+// // stringの部分はフィールド名の型を表します。インデックス型のフィールド名の型はstring、number、symbolのみが指定できます
+// obj = {
+//   a: 1,
+//   b: 2
+// } // ok
+
+// // インデックス型のオブジェクトであれば、フィールド名が定義されていないプロパティも代入できます
+// obj.c = 4; // ok
+// obj["d"] = 5; // ok
+
+// // Record<K, T> を使っても同じ表現ができる 
+// let obj2: Record<string, number>;
+
+/* オブジェクトの分割代入 */
+// const item = { price: 100 };
+// // プロパティ名が変数として使える
+// const { price } = item;
+// console.log(price);
+
+// type ColorObj = {
+//   r?: number;
+//   g: number;
+//   b: number;
+//   a: number | string;
+// };
+// const color: ColorObj = {
+//   r: 0,
+//   g: 100,
+//   b: 125,
+//   a: 0.5
+// };
+// const { r, g, b, a } = color;
+// console.log(r, g, b, a);
+
+// // 代入する変数名を変えることも可
+// const { r: red, g: green, b: black, a: alpha } = color;
+
+// // デフォルト値の指定
+// // 分割代入では、=のあとにデフォルト値が指定できます。
+// // デフォルト値は値が、undefinedのときに代入されます。
+// type defaultObj = {
+//   d?: number;
+//   e: string;
+//   f: null;
+// };
+// const example: defaultObj = {
+//   d: undefined,
+//   e: "hello",
+//   f: null,
+// };
+// const { d = 1000, e = "default", f = false } = example;
+// console.log(d, e, f); // 1000 hello null
+
+/* shorthand property names */
+// // オブジェクトのキーと変数名が同じ時に限り、ショートハンドが使える
+// type Wild = {
+//   pokeName: string;
+//   no: number;
+//   genre: string;
+//   height: number;
+//   weight: number;
+// };
+
+// const pokeName = "pikachu";
+// const no = 25;
+// const genre = "mouse pokemon";
+// const height = 0.4;
+// const weight = 0.6;
+
+// // const pikachu: Wild = {
+// //   pokeName: pokeName,
+// //   no: no,
+// //   genre: genre,
+// //   height: height,
+// //   weight: weight,
+// // };
+
+// // 上記の省略形
+// const pikachu: Wild = {
+//   pokeName,
+//   no,
+//   genre,
+//   height,
+//   weight,
+// };
+// console.table(pikachu);
+
+/* オブジェクトのループ */
+// for...in
+const foo : {
+  a: number;
+  b: number;
+  c: number;
+  [key: string]: number;
+} = {
   a: 1,
-  b: 2
-} // ok
-
-// インデックス型のオブジェクトであれば、フィールド名が定義されていないプロパティも代入できます
-obj.c = 4; // ok
-obj["d"] = 5; // ok
-
-// Record<K, T> を使っても同じ表現ができる 
-let obj2: Record<string, number>;
+  b: 2,
+  c: 3,
+};
+for (const item in foo) {
+  console.log(item, foo[item]);
+}
