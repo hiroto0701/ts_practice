@@ -176,12 +176,34 @@
   p.151 4.2 関数の型
  ========================== */
 /* 4.2.1 関数型の記法 */
-// 関数型は (引数リスト) => 返り値の型 という形を持つ。
-const xRepeat = (num: number): string => "x".repeat(num);
-//    ^^^^^^^ (num: number) => string <= 関数の型
+// // 関数型は (引数リスト) => 返り値の型 という形を持つ。
+// const xRepeat = (num: number): string => "x".repeat(num);
+// //    ^^^^^^^ (num: number) => string <= 関数の型
 
-// example
-// 関数型も型の一種なのでtypeエイリアスをつけたり、型注釈として使用できる
-type F = (repeatNum: number) => string;
-const aRepeat: F = (num: number): string => "a".repeat(num); // 引数名違うけどいいの？？
-// 引数名は違っても影響なし
+// // example
+// // 関数型も型の一種なのでtypeエイリアスをつけたり、型注釈として使用できる
+// type F = (repeatNum: number) => string;
+// const aRepeat: F = (num: number): string => "a".repeat(num); // 引数名違うけどいいの？？
+// // 引数名は違っても影響なし
+
+/* 4.2.5 コールシグネチャによる関数型の表現 */
+// コールシグネチャはオブジェクト型の中で使用可能
+// (引数リスト): 返り値の型; という形
+type MyFunc = {
+  isUsed?: boolean;
+  (arg: number): void;
+};
+const double: MyFunc = (arg: number) => {
+  console.log(arg * 2);
+}
+
+double.isUsed = true;
+console.log(double.isUsed);
+double(500);
+
+// オブジェクト型がコールシグネチャを複数持つことも可能
+// 例 「string型を渡すとnumber型を返し、number型を渡すとboolean型を返す」
+type SwapFunc = {
+  (arg: string): number;
+  (arg: number): boolean;
+};
