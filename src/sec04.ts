@@ -181,5 +181,7 @@ const xRepeat = (num: number): string => "x".repeat(num);
 //    ^^^^^^^ (num: number) => string <= 関数の型
 
 // example
+// 関数型も型の一種なのでtypeエイリアスをつけたり、型注釈として使用できる
 type F = (repeatNum: number) => string;
-const aRepeat: F = (num: number): string => "a".repeat(num);
+const aRepeat: F = (num: number): string => "a".repeat(num); // 引数名違うけどいいの？？
+// 引数名は違っても影響なし
