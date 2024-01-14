@@ -75,10 +75,33 @@
 // console.log(double(5));
 // console.log(double(100));
 /* 4.1.7 可変長引数の宣言 */
-// 可変長引数 => 引数の数が明確に決まっていないときに使うよ
-// tsではrestパターンを使用することで可能になっている
-// rest引数を持つ場合、関数呼び出し時に自動的に配列が作られる
-// 引数の型は配列かタプル型
+// // 可変長引数 => 引数の数が明確に決まっていないときに使うよ
+// // tsではrestパターンを使用することで可能になっている
+// // rest引数を持つ場合、関数呼び出し時に自動的に配列が作られる
+// // 引数の型は配列かタプル型
+// const sum = (...args: number[]): number => {
+//   let result = 0;
+//   for (const num of args) {
+//     result += num;
+//   }
+//   return result;
+// }
+// console.log(sum(1, 3, 5)); // 9
+// console.log(sum(2, 4, 6)); // 12
+// console.log(sum()); // 0
+// // rest引数は別の引数との併用も可能
+// const sum2 = (base: number, ...args: number[]): number => {
+//   let result = base * 1000;
+//   for (const num of args) {
+//     result += num;
+//   }
+//   return result;
+// }
+// console.log(sum2(10, 2, 5));
+// console.log(sum2(123, 456));
+// // console.log(sum2()); // Expected at least 1 arguments, but got 0.
+/* 4.1.8 関数呼び出しにおけるスプレッド構文 */
+// 可変長引数を受け取る関数と一緒に使われることが多い
 const sum = (...args) => {
     let result = 0;
     for (const num of args) {
@@ -86,17 +109,11 @@ const sum = (...args) => {
     }
     return result;
 };
-console.log(sum(1, 3, 5)); // 9
-console.log(sum(2, 4, 6)); // 12
-console.log(sum()); // 0
-// rest引数は別の引数との併用も可能
-const sum2 = (base, ...args) => {
-    let result = base * 1000;
-    for (const num of args) {
-        result += num;
-    }
-    return result;
-};
-console.log(sum2(10, 2, 5));
-console.log(sum2(123, 456));
-// console.log(sum2()); // Expected at least 1 arguments, but got 0.
+const nums = [1, 2, 3, 4, 5];
+console.log(sum(...nums));
+const sum2 = (a, b, c) => a + b + c;
+// スプレッド構文を使用する際は要素数は不明なはずなのでタプル型で要素数を明示する必要がある
+const nums2 = [1, 2, 3];
+const nums3 = [1, 2, 3];
+// console.log(sum2(...nums2)); // error TS2556: A spread argument must either have a tuple type or be passed to a rest parameter.
+console.log(sum2(...nums3));

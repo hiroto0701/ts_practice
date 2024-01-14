@@ -115,3 +115,22 @@
 // console.log(sum2(10, 2, 5));
 // console.log(sum2(123, 456));
 // // console.log(sum2()); // Expected at least 1 arguments, but got 0.
+
+/* 4.1.8 関数呼び出しにおけるスプレッド構文 */
+// // 可変長引数を受け取る関数と一緒に使われることが多い
+// const sum = (...args: number[]): number => {
+//   let result = 0;
+//   for (const num of args) {
+//     result += num;
+//   }
+//   return result;
+// }
+// const nums: Array<number> = [1, 2, 3, 4, 5];
+// console.log(sum(...nums));
+
+// const sum2 = (a: number, b: number, c: number) => a + b + c;
+// // スプレッド構文を使用する際は要素数は不明なはずなのでタプル型で要素数を明示する必要がある
+// const nums2: number[] = [1, 2, 3];
+// const nums3: [number, number, number] = [1, 2, 3];
+// console.log(sum2(...nums2)); // error TS2556: A spread argument must either have a tuple type or be passed to a rest parameter.
+// console.log(sum2(...nums3));
