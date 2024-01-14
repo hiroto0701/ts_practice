@@ -54,21 +54,64 @@
 // console.log(calcBMI2(inagaki));
 
 /* 4.1.4 アロー関数式 */
-// (引数): 返り値の型 => {}
- type Human = {
-  height: number;
-  weight: number;
-};
+// // (引数): 返り値の型 => {}
+//  type Human = {
+//   height: number;
+//   weight: number;
+// };
 
-const calcBMI = ({ height, weight }: Human): number => {
-  return weight / height ** 2;
-}
-// 関数の中身が式一つのみだったら省略してかける
-const calcBMI2 = ({ height, weight }: Human): number =>  weight / height ** 2;
+// const calcBMI = ({ height, weight }: Human): number => {
+//   return weight / height ** 2;
+// }
+// // 関数の中身が式一つのみだったら省略してかける
+// const calcBMI2 = ({ height, weight }: Human): number =>  weight / height ** 2;
 
 
-const inagaki: Human = {
-  height: 1.75,
-  weight: 64
-};
-console.log(calcBMI(inagaki));
+// const inagaki: Human = {
+//   height: 1.75,
+//   weight: 64
+// };
+// console.log(calcBMI(inagaki));
+
+/* 4.1.6 メソッド記法で関数を作る */
+// // プロパティ名(引数リスト): 返り値の型 {}
+// const obj = {
+//   double(num: number): number {
+//     return num * 2;
+//   },
+//   // アロー関数も使える
+//   double2: (num: number): number => num * 2,
+// }
+// const { double, double2 } = obj;
+// console.log(double(5));
+// console.log(double(100));
+
+/* 4.1.7 可変長引数の宣言 */
+// // 可変長引数 => 引数の数が明確に決まっていないときに使うよ
+// // tsではrestパターンを使用することで可能になっている
+// // rest引数を持つ場合、関数呼び出し時に自動的に配列が作られる
+// // 引数の型は配列かタプル型
+// const sum = (...args: number[]): number => {
+//   let result = 0;
+//   for (const num of args) {
+//     result += num;
+//   }
+//   return result;
+// }
+
+// console.log(sum(1, 3, 5)); // 9
+// console.log(sum(2, 4, 6)); // 12
+// console.log(sum()); // 0
+
+// // rest引数は別の引数との併用も可能
+// const sum2 = (base: number, ...args: number[]): number => {
+//   let result = base * 1000;
+//   for (const num of args) {
+//     result += num;
+//   }
+//   return result;
+// }
+
+// console.log(sum2(10, 2, 5));
+// console.log(sum2(123, 456));
+// // console.log(sum2()); // Expected at least 1 arguments, but got 0.
