@@ -187,23 +187,46 @@
 // // 引数名は違っても影響なし
 
 /* 4.2.5 コールシグネチャによる関数型の表現 */
-// コールシグネチャはオブジェクト型の中で使用可能
-// (引数リスト): 返り値の型; という形
-type MyFunc = {
-  isUsed?: boolean;
-  (arg: number): void;
-};
-const double: MyFunc = (arg: number) => {
-  console.log(arg * 2);
+// // コールシグネチャはオブジェクト型の中で使用可能
+// // (引数リスト): 返り値の型; という形
+// type MyFunc = {
+//   isUsed?: boolean;
+//   (arg: number): void;
+// };
+// const double: MyFunc = (arg: number) => {
+//   console.log(arg * 2);
+// }
+
+// double.isUsed = true;
+// console.log(double.isUsed);
+// double(500);
+
+// // オブジェクト型がコールシグネチャを複数持つことも可能
+// // 例 「string型を渡すとnumber型を返し、number型を渡すとboolean型を返す」
+// type SwapFunc = {
+//   (arg: string): number;
+//   (arg: number): boolean;
+// };
+
+/* ==========================
+  p.161 4.3 関数型の部分型関係
+ ========================== */
+// 難しいので後日しっかりまとめる
+
+
+/* ==========================
+  p.168 4.4 ジェネリクス
+ ========================== */
+/* 4.4.1 関数の型引数とは */
+// 型引数を持つ関数（ジェネリック関数）を宣言する際には、関数名<型引数リスト> という構文を使用する。
+// 要は処理は共通だけど、受け取る引数の方が違う場合にそれぞれ関数を書き直すの面倒だから、引数を変数っぽくしちゃおう、という考え
+function repeat<T>(element: T, length: number): T[] {
+  const result: T[] = [];
+  for (let i = 0; i < length; i++) {
+    result.push(element);
+  }
+  return result;
 }
-
-double.isUsed = true;
-console.log(double.isUsed);
-double(500);
-
-// オブジェクト型がコールシグネチャを複数持つことも可能
-// 例 「string型を渡すとnumber型を返し、number型を渡すとboolean型を返す」
-type SwapFunc = {
-  (arg: string): number;
-  (arg: number): boolean;
-};
+console.log(repeat<string>("a", 5)); // function repeat<string>(element: string, length: number): string[]
+console.log(repeat<number>(123, 10)); // function repeat<number>(element: number, length: number): number[]
+console.log(repeat<boolean>(true,2)); // function repeat<boolean>(element: boolean, length: number): boolean[]
