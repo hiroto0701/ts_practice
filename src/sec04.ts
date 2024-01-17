@@ -232,36 +232,57 @@
 // console.log(repeat<boolean>(true,2)); // function repeat<boolean>(element: boolean, length: number): boolean[]
 
 /* 4.4.2 関数の型引数を宣言する方法 */
-// いろんな関数の宣言方法があったからそれぞれにジェネリクスを使ってみましょう
-// 1.通常の関数宣言
-function repeat<T>(element: T, length: number): T[] {
-  const result: T[] = [];
-  for (let i = 0; i < length; i++) {
-    result.push(element);
-  }
-  return result;
-}
+// // いろんな関数の宣言方法があったからそれぞれにジェネリクスを使ってみましょう
+// // 1.通常の関数宣言
+// function repeat<T>(element: T, length: number): T[] {
+//   const result: T[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(element);
+//   }
+//   return result;
+// }
 
-// 2.アロー関数
-const repeatArrow = <T>(elem: T, length: number): T[] => {
-  const result: T[] = [];
-  for (let i = 0; i < length; i++) {
-    result.push(elem);
-  }
-  return result;
-}
+// // 2.アロー関数
+// const repeatArrow = <T>(elem: T, length: number): T[] => {
+//   const result: T[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(elem);
+//   }
+//   return result;
+// }
 
-// 3.メソッド記法
-const utils = {
-  repeat<T>(elem: T, length: number): T[] {
-    const result: T[] = [];
-    for (let i = 0; i < length; i++) {
-      result.push(elem);
-    }
-    return result;
-  }
-}
+// // 3.メソッド記法
+// const utils = {
+//   repeat<T>(elem: T, length: number): T[] {
+//     const result: T[] = [];
+//     for (let i = 0; i < length; i++) {
+//       result.push(elem);
+//     }
+//     return result;
+//   }
+// }
 
-// 型引数リストが複数の場合もOK
-const pair = <Left, Right>(left: Left, right: Right): [Left, Right] => [left, right];
-const p = pair<string, number>("hiroto", 25);
+// // 型引数リストが複数の場合もOK
+// const pair = <Left, Right>(left: Left, right: Right): [Left, Right] => [left, right];
+// const p = pair<string, number>("hiroto", 25);
+
+// // extendsやオプショナル型引数も使用可能
+// const repeat2 = <T extends {
+//   name: string;
+// }>(element: T, length: number): T[] => {
+//   const result: T[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(element);
+//   }
+//   return result;
+// } 
+
+// type HasNameAndAge = {
+//   name: string;
+//   age: number;
+// }
+
+// console.log(repeat2<HasNameAndAge>({
+//   name: "hiroto",
+//   age: 25,
+// }, 4));

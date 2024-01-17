@@ -229,3 +229,15 @@ const utils = {
 // 型引数リストが複数の場合もOK
 const pair = (left, right) => [left, right];
 const p = pair("hiroto", 25);
+// extendsやオプショナル型引数も使用可能
+const repeat2 = (element, length) => {
+    const result = [];
+    for (let i = 0; i < length; i++) {
+        result.push(element);
+    }
+    return result;
+};
+console.log(repeat2({
+    name: "hiroto",
+    age: 25,
+}, 4));
