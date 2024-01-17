@@ -301,23 +301,44 @@
 // // ジェネリック関数は「好きな値で呼び出せばいい感じの型の返り値を返してくれる関数」であると言える
 
 /* 4.4.4 型引数を持つ関数型 */
-// 実は関数型には型引数の情報も含まれている
-const repeat = function<T>(element: T, length: number): T[] {
-  const result: T[] = [];
-  for (let i = 0; i < length; i++) {
-    result.push(element);
+// // 実は関数型には型引数の情報も含まれている
+// const repeat = function<T>(element: T, length: number): T[] {
+//   const result: T[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(element);
+//   }
+//   return result;
+// }
+
+// // const repeat: <T>(element: T, length: number) => T[]  上記の関数の型
+
+// // 要は次のようにかける
+// type Func = <T>(arg: T, num: number) => T[];
+// const repeat2: Func = (element, length) => {
+//   const result = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(element);
+//   }
+//   return result;
+// }
+
+/* ==========================
+  p.179 4.6 力試し
+ ========================== */
+//  4.6.1
+function getFizzBuzz(i: number):string | number {
+  if (i % 15 === 0) {
+    return "FizzBuzz";
+  } else if (i % 3 === 0) {
+    return "Fizz";
+  } else if (i % 5 === 0) {
+    return "Buzz";
+  } else {
+    return i;
   }
-  return result;
 }
 
-// const repeat: <T>(element: T, length: number) => T[]  上記の関数の型
-
-// 要は次のようにかける
-type Func = <T>(arg: T, num: number) => T[];
-const repeat2: Func = (element, length) => {
-  const result = [];
-  for (let i = 0; i < length; i++) {
-    result.push(element);
-  }
-  return result;
+for (let i = 1; i < 100; i++) {
+  const message = getFizzBuzz(i);
+  console.log(message);
 }
