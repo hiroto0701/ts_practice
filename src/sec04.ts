@@ -288,14 +288,36 @@
 // }, 4));
 
 /* 4.4.3 関数の型引数は省略できる */
-function repeat<T>(element: T, length: number): T[] {
+// function repeat<T>(element: T, length: number): T[] {
+//   const result: T[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(element);
+//   }
+//   return result;
+// }
+// const result = repeat("a", 10); // const result: string[] という型になる。
+// // 本来であれば関数呼び出しの際に repeat<string>() って感じで呼び出さないといけない。
+// // しかし、型引数を持つ関数を呼び出す際は、型引数の指定を省略可能。引数から推論する。
+// // ジェネリック関数は「好きな値で呼び出せばいい感じの型の返り値を返してくれる関数」であると言える
+
+/* 4.4.4 型引数を持つ関数型 */
+// 実は関数型には型引数の情報も含まれている
+const repeat = function<T>(element: T, length: number): T[] {
   const result: T[] = [];
   for (let i = 0; i < length; i++) {
     result.push(element);
   }
   return result;
 }
-const result = repeat("a", 10); // const result: string[] という型になる。
-// 本来であれば関数呼び出しの際に repeat<string>() って感じで呼び出さないといけない。
-// しかし、型引数を持つ関数を呼び出す際は、型引数の指定を省略可能。引数から推論する。
-// ジェネリック関数は「好きな値で呼び出せばいい感じの型の返り値を返してくれる関数」であると言える
+
+// const repeat: <T>(element: T, length: number) => T[]  上記の関数の型
+
+// 要は次のようにかける
+type Func = <T>(arg: T, num: number) => T[];
+const repeat2: Func = (element, length) => {
+  const result = [];
+  for (let i = 0; i < length; i++) {
+    result.push(element);
+  }
+  return result;
+}

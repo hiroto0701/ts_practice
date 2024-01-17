@@ -199,37 +199,75 @@
 // console.log(repeat<number>(123, 10)); // function repeat<number>(element: number, length: number): number[]
 // console.log(repeat<boolean>(true,2)); // function repeat<boolean>(element: boolean, length: number): boolean[]
 /* 4.4.2 関数の型引数を宣言する方法 */
-// いろんな関数の宣言方法があったからそれぞれにジェネリクスを使ってみましょう
-// 1.通常の関数宣言
-function repeat(element, length) {
+// // いろんな関数の宣言方法があったからそれぞれにジェネリクスを使ってみましょう
+// // 1.通常の関数宣言
+// function repeat<T>(element: T, length: number): T[] {
+//   const result: T[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(element);
+//   }
+//   return result;
+// }
+// // 2.アロー関数
+// const repeatArrow = <T>(elem: T, length: number): T[] => {
+//   const result: T[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(elem);
+//   }
+//   return result;
+// }
+// // 3.メソッド記法
+// const utils = {
+//   repeat<T>(elem: T, length: number): T[] {
+//     const result: T[] = [];
+//     for (let i = 0; i < length; i++) {
+//       result.push(elem);
+//     }
+//     return result;
+//   }
+// }
+// // 型引数リストが複数の場合もOK
+// const pair = <Left, Right>(left: Left, right: Right): [Left, Right] => [left, right];
+// const p = pair<string, number>("hiroto", 25);
+// // extendsやオプショナル型引数も使用可能
+// const repeat2 = <T extends {
+//   name: string;
+// }>(element: T, length: number): T[] => {
+//   const result: T[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(element);
+//   }
+//   return result;
+// } 
+// type HasNameAndAge = {
+//   name: string;
+//   age: number;
+// }
+// console.log(repeat2<HasNameAndAge>({
+//   name: "hiroto",
+//   age: 25,
+// }, 4));
+/* 4.4.3 関数の型引数は省略できる */
+// function repeat<T>(element: T, length: number): T[] {
+//   const result: T[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(element);
+//   }
+//   return result;
+// }
+// const result = repeat("a", 10); // const result: string[] という型になる。
+// // 本来であれば関数呼び出しの際に repeat<string>() って感じで呼び出さないといけない。
+// // しかし、型引数を持つ関数を呼び出す際は、型引数の指定を省略可能。引数から推論する。
+// // ジェネリック関数は「好きな値で呼び出せばいい感じの型の返り値を返してくれる関数」であると言える
+/* 4.4.4 型引数を持つ関数型 */
+// 実は関数型には型引数の情報も含まれている
+const repeat = function (element, length) {
     const result = [];
     for (let i = 0; i < length; i++) {
         result.push(element);
     }
     return result;
-}
-// 2.アロー関数
-const repeatArrow = (elem, length) => {
-    const result = [];
-    for (let i = 0; i < length; i++) {
-        result.push(elem);
-    }
-    return result;
 };
-// 3.メソッド記法
-const utils = {
-    repeat(elem, length) {
-        const result = [];
-        for (let i = 0; i < length; i++) {
-            result.push(elem);
-        }
-        return result;
-    }
-};
-// 型引数リストが複数の場合もOK
-const pair = (left, right) => [left, right];
-const p = pair("hiroto", 25);
-// extendsやオプショナル型引数も使用可能
 const repeat2 = (element, length) => {
     const result = [];
     for (let i = 0; i < length; i++) {
@@ -237,7 +275,3 @@ const repeat2 = (element, length) => {
     }
     return result;
 };
-console.log(repeat2({
-    name: "hiroto",
-    age: 25,
-}, 4));
