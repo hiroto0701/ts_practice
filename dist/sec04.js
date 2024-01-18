@@ -281,22 +281,42 @@
 /* ==========================
   p.179 4.6 力試し
  ========================== */
-//  4.6.1
-function getFizzBuzz(i) {
-    if (i % 15 === 0) {
-        return "FizzBuzz";
+// //  4.6.1
+// function getFizzBuzz(i: number):string | number {
+//   if (i % 15 === 0) {
+//     return "FizzBuzz";
+//   } else if (i % 3 === 0) {
+//     return "Fizz";
+//   } else if (i % 5 === 0) {
+//     return "Buzz";
+//   } else {
+//     return i;
+//   }
+// }
+// for (let i = 1; i < 100; i++) {
+//   const message = getFizzBuzz(i);
+//   console.log(message);
+// }
+// function sequence(x: number, y: number): number[] {
+//   const result: number[] = [];
+//   for (let i = x; i < y; i++) {
+//     result.push(i);
+//   }
+//   return result;
+// }
+// for (const i of sequence(1, 100)) {
+//   const message = getFizzBuzz(i);
+//   console.log(message);
+// }
+// 4.6.3 コールバック関数の練習
+// ますは穴埋め
+function map(array, callback) {
+    const result = [];
+    for (const elem of array) {
+        result.push(callback(elem));
     }
-    else if (i % 3 === 0) {
-        return "Fizz";
-    }
-    else if (i % 5 === 0) {
-        return "Buzz";
-    }
-    else {
-        return i;
-    }
+    return result;
 }
-for (let i = 1; i < 100; i++) {
-    const message = getFizzBuzz(i);
-    console.log(message);
-}
+const data = [1, 1, 2, 3, 5, 8, 13];
+const result = map(data, (x) => x * 10);
+console.log(result); // [10, 10, 20, 30, 50, 80, 130]
