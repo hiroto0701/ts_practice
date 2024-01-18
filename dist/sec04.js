@@ -300,3 +300,14 @@ for (let i = 1; i < 100; i++) {
     const message = getFizzBuzz(i);
     console.log(message);
 }
+function sequence(x, y) {
+    const result = [];
+    for (let i = x; i < y; i++) {
+        result.push(i);
+    }
+    return result;
+}
+for (const i of sequence(1, 100)) {
+    const message = getFizzBuzz(i);
+    console.log(message);
+}
