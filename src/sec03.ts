@@ -335,42 +335,6 @@
 /* ====================
   3.7その他の組み込みオブジェクト 
 ===================== */
-// /* 3.7.1 Dateオブジェクト */
-// const date = new Date();
-// console.log(date);
-
-// const now = date.getTime();
-// console.log(now);
-
-// /* ====================
-//   3.8力試し
-// ===================== */
-// /* 3.8.1 データ処理 */
-// type User = {
-//   name: string;
-//   age: number;
-//   premiumUser: boolean;
-// }
-
-// const data: string = `
-// hiroto,25,1
-// John Smith,19,0
-// Taka,35,1
-// `;
-
-// const users: User[] = [];
-// const lines = data.split("\n");
-// // linesには以下のようなデータが代入される
-// // lines[0] = "hiroto,25,1"
-// // lines[1] = "John Smith,19,0"
-// // lines[2] = "Taka,35,1"
-// // lines[3] = ""  // 最後の改行による空の要素
-
-// for (const line of lines) {
-//   // lines[3]の空の要素をスキップする
-//   if (line === "") {
-//     continue;
-//   }
 
 //   const [name, ageString, premiumUserString] = line.split(",");
 //   const age = Number(ageString);

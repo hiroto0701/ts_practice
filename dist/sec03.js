@@ -284,15 +284,12 @@
 /* ====================
   3.7その他の組み込みオブジェクト
 ===================== */
-// /* 3.7.1 Dateオブジェクト */
+
 // const date = new Date();
 // console.log(date);
 // const now = date.getTime();
 // console.log(now);
-// /* ====================
-//   3.8力試し
-// ===================== */
-// /* 3.8.1 データ処理 */
+
 // type User = {
 //   name: string;
 //   age: number;

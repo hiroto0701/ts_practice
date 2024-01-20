@@ -100,3 +100,4 @@
 // console.log(sum2(10, 2, 5));
 // console.log(sum2(123, 456));
 // // console.log(sum2()); // Expected at least 1 arguments, but got 0.
+
