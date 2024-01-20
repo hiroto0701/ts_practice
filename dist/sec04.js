@@ -75,28 +75,28 @@
 // console.log(double(5));
 // console.log(double(100));
 /* 4.1.7 可変長引数の宣言 */
-// 可変長引数 => 引数の数が明確に決まっていないときに使うよ
-// tsではrestパターンを使用することで可能になっている
-// rest引数を持つ場合、関数呼び出し時に自動的に配列が作られる
-// 引数の型は配列かタプル型
-const sum = (...args) => {
-    let result = 0;
-    for (const num of args) {
-        result += num;
-    }
-    return result;
-};
-console.log(sum(1, 3, 5)); // 9
-console.log(sum(2, 4, 6)); // 12
-console.log(sum()); // 0
-// rest引数は別の引数との併用も可能
-const sum2 = (base, ...args) => {
-    let result = base * 1000;
-    for (const num of args) {
-        result += num;
-    }
-    return result;
-};
-console.log(sum2(10, 2, 5));
-console.log(sum2(123, 456));
-// console.log(sum2()); // Expected at least 1 arguments, but got 0.
+// // 可変長引数 => 引数の数が明確に決まっていないときに使うよ
+// // tsではrestパターンを使用することで可能になっている
+// // rest引数を持つ場合、関数呼び出し時に自動的に配列が作られる
+// // 引数の型は配列かタプル型
+// const sum = (...args: number[]): number => {
+//   let result = 0;
+//   for (const num of args) {
+//     result += num;
+//   }
+//   return result;
+// }
+// console.log(sum(1, 3, 5)); // 9
+// console.log(sum(2, 4, 6)); // 12
+// console.log(sum()); // 0
+// // rest引数は別の引数との併用も可能
+// const sum2 = (base: number, ...args: number[]): number => {
+//   let result = base * 1000;
+//   for (const num of args) {
+//     result += num;
+//   }
+//   return result;
+// }
+// console.log(sum2(10, 2, 5));
+// console.log(sum2(123, 456));
+// // console.log(sum2()); // Expected at least 1 arguments, but got 0.
