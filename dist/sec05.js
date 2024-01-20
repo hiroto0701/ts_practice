@@ -20,4 +20,13 @@ class Animal {
     }
 }
 const lion = new Animal();
-console.log(lion.type);
+console.log(lion.type); // undefined
+// readonlyプロパティ
+class readOnly {
+    constructor() {
+        this.name = "";
+        this.age = 0;
+    }
+}
+const readOnlyName = new readOnly();
+readOnlyName.name = "aaaaa";
