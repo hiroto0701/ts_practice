@@ -127,4 +127,4 @@ const hiroto: inagaki = {
 };
 
 console.log(hiroto.name);
-
+console.log(hiroto.age);
