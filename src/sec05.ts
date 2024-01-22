@@ -90,22 +90,41 @@
 // staticのメリットはインスタンスを生成せずにプロパティやメソッドにアクセスできる点
 
 /* 5.1.6 3種類のアクセシビリティ修飾子 */
-// public private protectedの3種類。アクセシビリティ修飾子といいます。
-class User {
+// // public private protectedの3種類。アクセシビリティ修飾子といいます。
+// class User {
+//   name: string;
+//   private age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   public isAdult() {
+//     return this.age >= 20;
+//   }
+// }
+// const hiro = new User("hiro", 25);
+// console.log(hiro.name);
+// console.log(hiro.isAdult());
+// // console.log(hiro.age); // Property 'age' is private and only accessible within class 'User'. 
+// // private で定義されているプロパティ、メソッドはクラスの外からアクセスできない
+
+type inagaki = {
   name: string;
-  private age: number;
-
-  constructor(name: string, age: number) {
-    this.name = name;
-    this.age = age;
-  }
-
-  public isAdult() {
-    return this.age >= 20;
-  }
+  age: number;
+  hobbies: string[];
 }
-const hiro = new User("hiro", 25);
-console.log(hiro.name);
-console.log(hiro.isAdult());
-// console.log(hiro.age); // Property 'age' is private and only accessible within class 'User'. 
-// private で定義されているプロパティ、メソッドはクラスの外からアクセスできない
+
+const hiroto: inagaki = {
+  name: "hiroto",
+  age: 25,
+  hobbies: [
+    "soccer",
+    "game",
+    "programming"
+  ],
+};
+
+console.log(hiroto.name);
+
