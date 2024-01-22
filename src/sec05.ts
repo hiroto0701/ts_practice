@@ -108,5 +108,3 @@
 // console.log(hiro.isAdult());
 // // console.log(hiro.age); // Property 'age' is private and only accessible within class 'User'. 
 // // private で定義されているプロパティ、メソッドはクラスの外からアクセスできない
-
-
