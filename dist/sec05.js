@@ -13,3 +13,4 @@ const hiroto = {
 };
 console.log(hiroto.name);
 console.log(hiroto.age);
+console.log(hiroto.hobbies[0]);
