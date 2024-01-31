@@ -110,23 +110,23 @@
 // // console.log(hiro.age); // Property 'age' is private and only accessible within class 'User'. 
 // // private で定義されているプロパティ、メソッドはクラスの外からアクセスできない
 
-type inagaki = {
-  name: string;
-  age: number;
-  hobbies: string[];
-}
+// type inagaki = {
+//   name: string;
+//   age: number;
+//   hobbies: string[];
+// }
 
-const hiroto: inagaki = {
-  name: "hiroto",
-  age: 25,
-  hobbies: [
-    "soccer",
-    "game",
-    "programming"
-  ],
-};
+// const hiroto: inagaki = {
+//   name: "hiroto",
+//   age: 25,
+//   hobbies: [
+//     "soccer",
+//     "game",
+//     "programming"
+//   ],
+// };
 
-console.log(hiroto.name);
-console.log(hiroto.age);
-console.log(hiroto.hobbies[0]);
-console.log(hiroto.hobbies[2]);
+// console.log(hiroto.name);
+// console.log(hiroto.age);
+// console.log(hiroto.hobbies[0]);
+// console.log(hiroto.hobbies[2]);
