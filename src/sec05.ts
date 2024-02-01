@@ -173,22 +173,50 @@
 
 
 /* 5.1.9 もう一つのプライベートプロパティ */
-// #プロパティ名 とすることでプライベートプロパティにできる
-class User {
-  name: string;
-  #age: number;
+// // #プロパティ名 とすることでプライベートプロパティにできる
+// class User {
+//   name: string;
+//   #age: number;
 
-  constructor(name: string, age: number) {
-    this.name = name;
-    this.#age = age;
-  }
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.#age = age;
+//   }
 
-  public isAdult(): boolean {
-    return this.#age >= 20;
+//   public isAdult(): boolean {
+//     return this.#age >= 20;
+//   }
+// }
+
+// const inagaki = new User('hiroto', 25);
+// console.log(inagaki.name);  // hiroto
+// console.log(inagaki.isAdult());  // true
+// // console.log(inagaki.#age);  // Property '#age' is not accessible outside class 'User' because it has a private identifier.
+
+
+
+/* 5.1.10 クラスの静的初期化ブロック */
+console.log('hello');
+class C {
+  static {
+    console.log('inagaki');
   }
 }
+console.log('world');
+// hello
+// inagaki
+// world   の順で実行される
 
-const inagaki = new User('hiroto', 25);
-console.log(inagaki.name);  // hiroto
-console.log(inagaki.isAdult());  // true
-// console.log(inagaki.#age);  // Property '#age' is not accessible outside class 'User' because it has a private identifier.
+// staticブロックはクラスの中なのでprivateやprotectedにアクセス可能
+class User {
+  #age: number = 0;
+  getAge() {
+    return this.#age;
+  }
+  setAge(age: number) {
+    if (age < 0 || age > 150) {
+      return;
+    }
+    this.#age = age;
+  }
+}

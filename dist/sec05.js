@@ -2,18 +2,6 @@
 /* ==========================
   section5 typescript class
  ========================== */
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-};
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var _User_age;
 /* 5.1.1 クラスの宣言とnew構文 */
 // class User {
 //   name: string = "";
@@ -154,19 +142,27 @@ var _User_age;
 // console.log(inagaki.name);  // hiroto
 // console.log(inagaki.age);  // 25
 /* 5.1.9 もう一つのプライベートプロパティ */
-// #プロパティ名 とすることでプライベートプロパティにできる
-class User {
-    constructor(name, age) {
-        _User_age.set(this, void 0);
-        this.name = name;
-        __classPrivateFieldSet(this, _User_age, age, "f");
-    }
-    isAdult() {
-        return __classPrivateFieldGet(this, _User_age, "f") >= 20;
-    }
+// // #プロパティ名 とすることでプライベートプロパティにできる
+// class User {
+//   name: string;
+//   #age: number;
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.#age = age;
+//   }
+//   public isAdult(): boolean {
+//     return this.#age >= 20;
+//   }
+// }
+// const inagaki = new User('hiroto', 25);
+// console.log(inagaki.name);  // hiroto
+// console.log(inagaki.isAdult());  // true
+// // console.log(inagaki.#age);  // Property '#age' is not accessible outside class 'User' because it has a private identifier.
+/* 5.1.10 クラスの静的初期化ブロック */
+console.log('hello');
+class C {
 }
-_User_age = new WeakMap();
-const inagaki = new User('hiroto', 25);
-console.log(inagaki.name); // hiroto
-console.log(inagaki.isAdult()); // true
-// console.log(inagaki.#age);  // Property '#age' is not accessible outside class 'User' because it has a private identifier.
+(() => {
+    console.log('inagaki');
+})();
+console.log('world');
