@@ -133,19 +133,40 @@
 
 
 /* 5.1.7 コンストラクタ引数でのプロパティ宣言 */
-// コンストラクタは受け取った引数をそのままプロパティの初期化に使用できる。
-// それをより簡単にするのが以下の記述方法
-// これが従来の記述方法
-class User {
-  name: string;
-  private age: number;
+// // コンストラクタは受け取った引数をそのままプロパティの初期化に使用できる。
+// // それをより簡単にするのが以下の記述方法
+// // これが従来の記述方法
+// class User {
+//   name: string;
+//   private age: number;
 
-  constructor(name: string, age:number) {
+//   constructor(name: string, age:number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+// }
+
+// class User2 {
+//   constructor(public name: string, private age: number) {}
+// }
+
+
+/* 5.1.8 クラス式でクラスを作成する */
+const User = class {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
     this.name = name;
     this.age = age;
   }
+
+  public isAdult(): boolean {
+    return this.age >= 20;
+  }
 }
 
-class User2 {
-  constructor(public name: string, private age: number) {}
-}
+// Userは今までと同様に使用可能
+const inagaki = new User('hiroto', 25);
+console.log(inagaki.name);  // hiroto
+console.log(inagaki.age);  // 25
