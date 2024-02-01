@@ -130,3 +130,93 @@
 // console.log(hiroto.age);
 // console.log(hiroto.hobbies[0]);
 // console.log(hiroto.hobbies[2]);
+
+
+/* 5.1.7 コンストラクタ引数でのプロパティ宣言 */
+// // コンストラクタは受け取った引数をそのままプロパティの初期化に使用できる。
+// // それをより簡単にするのが以下の記述方法
+// // これが従来の記述方法
+// class User {
+//   name: string;
+//   private age: number;
+
+//   constructor(name: string, age:number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+// }
+
+// class User2 {
+//   constructor(public name: string, private age: number) {}
+// }
+
+
+/* 5.1.8 クラス式でクラスを作成する */
+// const User = class {
+//   name: string;
+//   age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   public isAdult(): boolean {
+//     return this.age >= 20;
+//   }
+// }
+
+// // Userは今までと同様に使用可能
+// const inagaki = new User('hiroto', 25);
+// console.log(inagaki.name);  // hiroto
+// console.log(inagaki.age);  // 25
+
+
+/* 5.1.9 もう一つのプライベートプロパティ */
+// // #プロパティ名 とすることでプライベートプロパティにできる
+// class User {
+//   name: string;
+//   #age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.#age = age;
+//   }
+
+//   public isAdult(): boolean {
+//     return this.#age >= 20;
+//   }
+// }
+
+// const inagaki = new User('hiroto', 25);
+// console.log(inagaki.name);  // hiroto
+// console.log(inagaki.isAdult());  // true
+// // console.log(inagaki.#age);  // Property '#age' is not accessible outside class 'User' because it has a private identifier.
+
+
+
+/* 5.1.10 クラスの静的初期化ブロック */
+console.log('hello');
+class C {
+  static {
+    console.log('inagaki');
+  }
+}
+console.log('world');
+// hello
+// inagaki
+// world   の順で実行される
+
+// staticブロックはクラスの中なのでprivateやprotectedにアクセス可能
+class User {
+  #age: number = 0;
+  getAge() {
+    return this.#age;
+  }
+  setAge(age: number) {
+    if (age < 0 || age > 150) {
+      return;
+    }
+    this.#age = age;
+  }
+}
