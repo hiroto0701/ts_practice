@@ -130,3 +130,22 @@
 // console.log(hiroto.age);
 // console.log(hiroto.hobbies[0]);
 // console.log(hiroto.hobbies[2]);
+
+
+/* 5.1.7 コンストラクタ引数でのプロパティ宣言 */
+// コンストラクタは受け取った引数をそのままプロパティの初期化に使用できる。
+// それをより簡単にするのが以下の記述方法
+// これが従来の記述方法
+class User {
+  name: string;
+  private age: number;
+
+  constructor(name: string, age:number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+class User2 {
+  constructor(public name: string, private age: number) {}
+}
