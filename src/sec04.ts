@@ -356,16 +356,16 @@
 //   console.log(message);
 // }
 
-// 4.6.3 コールバック関数の練習
-// ますは穴埋め
-function map(array: number[], callback: (x: number) => number ): number[] {
-  const result: number[] = [];
-  for (const elem of array) {
-    result.push(callback(elem));
-  }
-  return result;
-} 
+// // 4.6.3 コールバック関数の練習
+// // ますは穴埋め
+// function map(array: number[], callback: (x: number) => number ): number[] {
+//   const result: number[] = [];
+//   for (const elem of array) {
+//     result.push(callback(elem));
+//   }
+//   return result;
+// } 
 
-const data = [1, 1, 2, 3, 5, 8, 13];
-const result = map(data, (x) => x * 10);
-console.log(result); // [10, 10, 20, 30, 50, 80, 130]
+// const data = [1, 1, 2, 3, 5, 8, 13];
+// const result = map(data, (x) => x * 10);
+// console.log(result); // [10, 10, 20, 30, 50, 80, 130]
