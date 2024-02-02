@@ -196,51 +196,77 @@
 
 
 /* 5.1.10 クラスの静的初期化ブロック */
-console.log('hello');
-class C {
-  static {
-    console.log('inagaki');
-  }
-}
-console.log('world');
-// hello
-// inagaki
-// world   の順で実行される
+// console.log('hello');
+// class C {
+//   static {
+//     console.log('inagaki');
+//   }
+// }
+// console.log('world');
+// // hello
+// // inagaki
+// // world   の順で実行される
 
-// staticブロックはクラスの中なのでprivateやprotectedにアクセス可能
-class User {
-  #age: number = 0;
-  getAge() {
-    return this.#age;
-  }
-  setAge(age: number) {
-    if (age < 0 || age > 150) {
-      return;
-    }
+// // staticブロックはクラスの中なのでprivateやprotectedにアクセス可能
+// class User {
+//   #age: number = 0;
+//   getAge() {
+//     return this.#age;
+//   }
+//   setAge(age: number) {
+//     if (age < 0 || age > 150) {
+//       return;
+//     }
+//     this.#age = age;
+//   }
+// }
+// // このままだとageが0〜150までの間でしか#ageに設定することができない
+
+// // staticブロックを活用して制限を突破する
+// class User2 {
+//   static adminUser: User2;
+//   static {
+//     this.adminUser = new User2();
+//     this.adminUser.#age = 9999;
+//   }
+
+//   #age: number = 0;
+//   getAge() {
+//     return this.#age;
+//   }
+//   setAge(age: number) {
+//     if (age < 0 || age > 150) {
+//       return;
+//     }
+//     this.#age = age;
+//   }
+// }
+// console.log(User2.adminUser.getAge());  // 9999
+// const inagaki = new User2();
+// console.log(inagaki.getAge());  // 直接 #age を書き換えるわけではないから 0 
+
+
+
+/* 5.1.11 型引数を持つクラス */
+class User<T> {
+  name: string;
+  #age: number;
+  readonly data: T;
+
+  constructor(name: string, age: number, data: T) {
+    this.name = name;
     this.#age = age;
-  }
-}
-// このままだとageが0〜150までの間でしか#ageに設定することができない
-
-// staticブロックを活用して制限を突破する
-class User2 {
-  static adminUser: User2;
-  static {
-    this.adminUser = new User2();
-    this.adminUser.#age = 9999;
+    this.data = data;
   }
 
-  #age: number = 0;
-  getAge() {
-    return this.#age;
-  }
-  setAge(age: number) {
-    if (age < 0 || age > 150) {
-      return;
-    }
-    this.#age = age;
+  public isAdult(): boolean {
+    return this.#age >= 20;
   }
 }
-console.log(User2.adminUser.getAge());  // 9999
-const inagaki = new User2();
-console.log(inagaki.getAge());
+// inagaki は User<string></string>型
+const inagaki = new User<string>('inagaki', 25, "データだよ");
+const data = inagaki.data;
+
+// taka は User<{ num: number }>型
+const taka = new User('taka', 35, { num: 123 });
+const data2 = taka.data;
