@@ -220,3 +220,27 @@ class User {
     this.#age = age;
   }
 }
+// このままだとageが0〜150までの間でしか#ageに設定することができない
+
+// staticブロックを活用して制限を突破する
+class User2 {
+  static adminUser: User2;
+  static {
+    this.adminUser = new User2();
+    this.adminUser.#age = 9999;
+  }
+
+  #age: number = 0;
+  getAge() {
+    return this.#age;
+  }
+  setAge(age: number) {
+    if (age < 0 || age > 150) {
+      return;
+    }
+    this.#age = age;
+  }
+}
+console.log(User2.adminUser.getAge());  // 9999
+const inagaki = new User2();
+console.log(inagaki.getAge());

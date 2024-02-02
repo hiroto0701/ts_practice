@@ -2,6 +2,18 @@
 /* ==========================
   section5 typescript class
  ========================== */
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _User_age, _a, _User2_age;
 /* 5.1.1 クラスの宣言とnew構文 */
 // class User {
 //   name: string = "";
@@ -166,3 +178,46 @@ class C {
     console.log('inagaki');
 })();
 console.log('world');
+// hello
+// inagaki
+// world   の順で実行される
+// staticブロックはクラスの中なのでprivateやprotectedにアクセス可能
+class User {
+    constructor() {
+        _User_age.set(this, 0);
+    }
+    getAge() {
+        return __classPrivateFieldGet(this, _User_age, "f");
+    }
+    setAge(age) {
+        if (age < 0 || age > 150) {
+            return;
+        }
+        __classPrivateFieldSet(this, _User_age, age, "f");
+    }
+}
+_User_age = new WeakMap();
+// このままだとageが0〜150までの間でしか#ageに設定することができない
+// staticブロックを活用して制限を突破する
+class User2 {
+    constructor() {
+        _User2_age.set(this, 0);
+    }
+    getAge() {
+        return __classPrivateFieldGet(this, _User2_age, "f");
+    }
+    setAge(age) {
+        if (age < 0 || age > 150) {
+            return;
+        }
+        __classPrivateFieldSet(this, _User2_age, age, "f");
+    }
+}
+_a = User2, _User2_age = new WeakMap();
+(() => {
+    _a.adminUser = new _a();
+    __classPrivateFieldSet(_a.adminUser, _User2_age, 9999, "f");
+})();
+console.log(User2.adminUser.getAge()); // 9999
+const inagaki = new User2();
+console.log(inagaki.getAge());
