@@ -7,13 +7,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-};
-var _User_age, _a, _User2_age;
+var _Department_employees;
 /* 5.1.1 クラスの宣言とnew構文 */
 // class User {
 //   name: string = "";
@@ -171,53 +165,121 @@ var _User_age, _a, _User2_age;
 // console.log(inagaki.isAdult());  // true
 // // console.log(inagaki.#age);  // Property '#age' is not accessible outside class 'User' because it has a private identifier.
 /* 5.1.10 クラスの静的初期化ブロック */
-console.log('hello');
-class C {
+// console.log('hello');
+// class C {
+//   static {
+//     console.log('inagaki');
+//   }
+// }
+// console.log('world');
+// // hello
+// // inagaki
+// // world   の順で実行される
+// // staticブロックはクラスの中なのでprivateやprotectedにアクセス可能
+// class User {
+//   #age: number = 0;
+//   getAge() {
+//     return this.#age;
+//   }
+//   setAge(age: number) {
+//     if (age < 0 || age > 150) {
+//       return;
+//     }
+//     this.#age = age;
+//   }
+// }
+// // このままだとageが0〜150までの間でしか#ageに設定することができない
+// // staticブロックを活用して制限を突破する
+// class User2 {
+//   static adminUser: User2;
+//   static {
+//     this.adminUser = new User2();
+//     this.adminUser.#age = 9999;
+//   }
+//   #age: number = 0;
+//   getAge() {
+//     return this.#age;
+//   }
+//   setAge(age: number) {
+//     if (age < 0 || age > 150) {
+//       return;
+//     }
+//     this.#age = age;
+//   }
+// }
+// console.log(User2.adminUser.getAge());  // 9999
+// const inagaki = new User2();
+// console.log(inagaki.getAge());  // 直接 #age を書き換えるわけではないから 0 
+/* 5.1.11 型引数を持つクラス */
+// class User<T> {
+//   name: string;
+//   #age: number;
+//   readonly data: T;
+//   constructor(name: string, age: number, data: T) {
+//     this.name = name;
+//     this.#age = age;
+//     this.data = data;
+//   }
+//   public isAdult(): boolean {
+//     return this.#age >= 20;
+//   }
+// }
+// // inagaki は User<string></string>型
+// const inagaki = new User<string>('inagaki', 25, "データだよ");
+// const data = inagaki.data;
+// // taka は User<{ num: number }>型
+// const taka = new User('taka', 35, { num: 123 });
+// const data2 = taka.data;
+/* Udemy 継承 */
+class Department {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+        _Department_employees.set(this, []);
+    }
+    describe() {
+        console.log(`Department (${this.id}): ${this.name}`);
+    }
+    addEmployee(employee) {
+        __classPrivateFieldGet(this, _Department_employees, "f").push(employee);
+    }
+    printEmployeeInformation() {
+        console.log(__classPrivateFieldGet(this, _Department_employees, "f").length);
+        console.log(__classPrivateFieldGet(this, _Department_employees, "f"));
+    }
 }
-(() => {
-    console.log('inagaki');
-})();
-console.log('world');
-// hello
-// inagaki
-// world   の順で実行される
-// staticブロックはクラスの中なのでprivateやprotectedにアクセス可能
-class User {
-    constructor() {
-        _User_age.set(this, 0);
-    }
-    getAge() {
-        return __classPrivateFieldGet(this, _User_age, "f");
-    }
-    setAge(age) {
-        if (age < 0 || age > 150) {
-            return;
-        }
-        __classPrivateFieldSet(this, _User_age, age, "f");
+_Department_employees = new WeakMap();
+const accounting = new Department('d1', 'Accounting');
+accounting.describe();
+accounting.addEmployee('Taka');
+accounting.printEmployeeInformation();
+// DepartmentクラスをもとにしたItDepartmentクラスを作成
+class ItDepartment extends Department {
+    constructor(id, admins) {
+        // 他のクラスを継承したクラスで新たにコンストラクタを追加する際は
+        // superというキーワードを使って、継承元に情報を渡す必要がある。
+        super(id, 'IT');
+        this.admins = admins;
     }
 }
-_User_age = new WeakMap();
-// このままだとageが0〜150までの間でしか#ageに設定することができない
-// staticブロックを活用して制限を突破する
-class User2 {
-    constructor() {
-        _User2_age.set(this, 0);
+const it = new ItDepartment('d2', ['Max']);
+it.describe();
+it.addEmployee('Taka');
+it.printEmployeeInformation();
+console.table(it);
+class AccountingDepartment extends Department {
+    constructor(id, reports) {
+        super(id, 'Accounting');
+        this.reports = reports;
     }
-    getAge() {
-        return __classPrivateFieldGet(this, _User2_age, "f");
+    addReport(text) {
+        this.reports.push(text);
     }
-    setAge(age) {
-        if (age < 0 || age > 150) {
-            return;
-        }
-        __classPrivateFieldSet(this, _User2_age, age, "f");
+    printReport() {
+        console.log(this.reports);
     }
 }
-_a = User2, _User2_age = new WeakMap();
-(() => {
-    _a.adminUser = new _a();
-    __classPrivateFieldSet(_a.adminUser, _User2_age, 9999, "f");
-})();
-console.log(User2.adminUser.getAge()); // 9999
-const inagaki = new User2();
-console.log(inagaki.getAge());
+const accounting3 = new AccountingDepartment('d2', []);
+accounting3.addReport('Something');
+accounting3.printReport();
+console.table(accounting3);
