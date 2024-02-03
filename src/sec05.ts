@@ -248,25 +248,88 @@
 
 
 /* 5.1.11 型引数を持つクラス */
-class User<T> {
-  name: string;
-  #age: number;
-  readonly data: T;
+// class User<T> {
+//   name: string;
+//   #age: number;
+//   readonly data: T;
 
-  constructor(name: string, age: number, data: T) {
-    this.name = name;
-    this.#age = age;
-    this.data = data;
+//   constructor(name: string, age: number, data: T) {
+//     this.name = name;
+//     this.#age = age;
+//     this.data = data;
+//   }
+
+//   public isAdult(): boolean {
+//     return this.#age >= 20;
+//   }
+// }
+// // inagaki は User<string></string>型
+// const inagaki = new User<string>('inagaki', 25, "データだよ");
+// const data = inagaki.data;
+
+// // taka は User<{ num: number }>型
+// const taka = new User('taka', 35, { num: 123 });
+// const data2 = taka.data;
+
+
+/* Udemy 継承 */
+class Department {
+  #employees: Array<string> = [];
+  
+  constructor(private readonly id: string, public name: string) {}
+
+  describe(this: Department) {
+    console.log(`Department (${this.id}): ${this.name}`);
   }
 
-  public isAdult(): boolean {
-    return this.#age >= 20;
+  addEmployee(employee: string) {
+    this.#employees.push(employee);
+  }
+
+  printEmployeeInformation() {
+    console.log(this.#employees.length);
+    console.log(this.#employees);
   }
 }
-// inagaki は User<string></string>型
-const inagaki = new User<string>('inagaki', 25, "データだよ");
-const data = inagaki.data;
 
-// taka は User<{ num: number }>型
-const taka = new User('taka', 35, { num: 123 });
-const data2 = taka.data;
+const accounting = new Department('d1', 'Accounting');
+accounting.describe();
+accounting.addEmployee('Taka');
+accounting.printEmployeeInformation();
+
+
+// DepartmentクラスをもとにしたItDepartmentクラスを作成
+class ItDepartment extends Department {
+  // 特有の処理を記述してなくても継承元のメソッドやプロパティは問題なく使用できる。
+
+  admins: string[];
+  constructor(id: string, admins: string[]) {
+    // 他のクラスを継承したクラスで新たにコンストラクタを追加する際は
+    // superというキーワードを使って、継承元に情報を渡す必要がある。
+    super(id, 'IT');
+    this.admins = admins;
+  }
+}
+const it = new ItDepartment('d2', ['Max']);
+it.describe();
+it.addEmployee('Taka');
+it.printEmployeeInformation();
+console.table(it);
+
+class AccountingDepartment extends Department {
+  constructor(id: string, private reports: string[]) {
+    super(id, 'Accounting');
+  }
+
+  addReport(text: string) {
+    this.reports.push(text);
+  }
+
+  printReport() {
+    console.log(this.reports);
+  }
+}
+const accounting3 = new AccountingDepartment('d2', []);
+accounting3.addReport('Something');
+accounting3.printReport();
+console.table(accounting3);
