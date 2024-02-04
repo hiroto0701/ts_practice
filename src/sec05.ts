@@ -272,64 +272,64 @@
 // const data2 = taka.data;
 
 
-/* Udemy 継承 */
-class Department {
-  #employees: Array<string> = [];
+// /* Udemy 継承 */
+// class Department {
+//   #employees: Array<string> = [];
   
-  constructor(private readonly id: string, public name: string) {}
+//   constructor(private readonly id: string, public name: string) {}
 
-  describe(this: Department) {
-    console.log(`Department (${this.id}): ${this.name}`);
-  }
+//   describe(this: Department) {
+//     console.log(`Department (${this.id}): ${this.name}`);
+//   }
 
-  addEmployee(employee: string) {
-    this.#employees.push(employee);
-  }
+//   addEmployee(employee: string) {
+//     this.#employees.push(employee);
+//   }
 
-  printEmployeeInformation() {
-    console.log(this.#employees.length);
-    console.log(this.#employees);
-  }
-}
+//   printEmployeeInformation() {
+//     console.log(this.#employees.length);
+//     console.log(this.#employees);
+//   }
+// }
 
-const accounting = new Department('d1', 'Accounting');
-accounting.describe();
-accounting.addEmployee('Taka');
-accounting.printEmployeeInformation();
+// const accounting = new Department('d1', 'Accounting');
+// accounting.describe();
+// accounting.addEmployee('Taka');
+// accounting.printEmployeeInformation();
 
 
-// DepartmentクラスをもとにしたItDepartmentクラスを作成
-class ItDepartment extends Department {
-  // 特有の処理を記述してなくても継承元のメソッドやプロパティは問題なく使用できる。
+// // DepartmentクラスをもとにしたItDepartmentクラスを作成
+// class ItDepartment extends Department {
+//   // 特有の処理を記述してなくても継承元のメソッドやプロパティは問題なく使用できる。
 
-  admins: string[];
-  constructor(id: string, admins: string[]) {
-    // 他のクラスを継承したクラスで新たにコンストラクタを追加する際は
-    // superというキーワードを使って、継承元に情報を渡す必要がある。
-    super(id, 'IT');
-    this.admins = admins;
-  }
-}
-const it = new ItDepartment('d2', ['Max']);
-it.describe();
-it.addEmployee('Taka');
-it.printEmployeeInformation();
-console.table(it);
+//   admins: string[];
+//   constructor(id: string, admins: string[]) {
+//     // 他のクラスを継承したクラスで新たにコンストラクタを追加する際は
+//     // superというキーワードを使って、継承元に情報を渡す必要がある。
+//     super(id, 'IT');
+//     this.admins = admins;
+//   }
+// }
+// const it = new ItDepartment('d2', ['Max']);
+// it.describe();
+// it.addEmployee('Taka');
+// it.printEmployeeInformation();
+// console.table(it);
 
-class AccountingDepartment extends Department {
-  constructor(id: string, private reports: string[]) {
-    super(id, 'Accounting');
-  }
+// class AccountingDepartment extends Department {
+//   constructor(id: string, private reports: string[]) {
+//     super(id, 'Accounting');
+//   }
 
-  addReport(text: string) {
-    this.reports.push(text);
-  }
+//   addReport(text: string) {
+//     this.reports.push(text);
+//   }
 
-  printReport() {
-    console.log(this.reports);
-  }
-}
-const accounting3 = new AccountingDepartment('d2', []);
-accounting3.addReport('Something');
-accounting3.printReport();
-console.table(accounting3);
+//   printReport() {
+//     console.log(this.reports);
+//   }
+// }
+// const accounting3 = new AccountingDepartment('d2', []);
+// accounting3.addReport('Something');
+// accounting3.printReport();
+// console.table(accounting3);
