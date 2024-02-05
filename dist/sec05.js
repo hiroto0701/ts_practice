@@ -2,13 +2,6 @@
 /* ==========================
   section5 typescript class
  ========================== */
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-};
-var _User_age;
 /* 5.1.1 クラスの宣言とnew構文 */
 // class User {
 //   name: string = "";
@@ -283,35 +276,49 @@ var _User_age;
 // console.table(accounting3);
 /* 5.2 クラスの型 */
 /* 5.2.1 クラス宣言はインスタンスの型を作る */
-// class User {
-//   name: string = "";
-//   age: number = 0;
-//   isAdult(): boolean {
-//     return this.age >= 20;
+// // class User {
+// //   name: string = "";
+// //   age: number = 0;
+// //   isAdult(): boolean {
+// //     return this.age >= 20;
+// //   }
+// // }
+// // // 変数inagakiはUser型という型を持っている
+// // const inagaki = new User();
+// // // ただしこの挙動はクラス宣言だけ
+// // const User = class {
+// //   name: string = "";
+// //   age: number = 0;
+// //   isAdult(): boolean {
+// //     return this.age >= 20;
+// //   }
+// // };
+// // // これはOK
+// // const inagaki = new User();
+// // // error: 'User' refers to a value, but is being used as a type here. Did you mean 'typeof User'?
+// // const taka: User = new User();
+// // 型引数を使うと、型引数を持つ方が生成される
+// class User<T> {
+//   name: string;
+//   #age: number;
+//   readonly data: T;
+//   constructor(name: string, age: number, data: T) {
+//     this.name = name;
+//     this.#age = age;
+//     this.data = data;
 //   }
 // }
-// // 変数inagakiはUser型という型を持っている
-// const inagaki = new User();
-// // ただしこの挙動はクラス宣言だけ
-// const User = class {
-//   name: string = "";
-//   age: number = 0;
-//   isAdult(): boolean {
-//     return this.age >= 20;
-//   }
-// };
-// // これはOK
-// const inagaki = new User();
-// // error: 'User' refers to a value, but is being used as a type here. Did you mean 'typeof User'?
-// const taka: User = new User();
-// 型引数を使うと、型引数を持つ方が生成される
+// const inagaki: User<string> = new User("hiroto", 25, "サッカー好き");
+/* 5.2.2 newシグネチャによるインスタンス化可能性の表現 */
 class User {
-    constructor(name, age, data) {
-        _User_age.set(this, void 0);
-        this.name = name;
-        __classPrivateFieldSet(this, _User_age, age, "f");
-        this.data = data;
+    constructor() {
+        this.name = "";
+        this.age = 0;
     }
 }
-_User_age = new WeakMap();
-const inagaki = new User("hiroto", 25, "サッカー好き");
+// UserはMyConstructor型を持つ
+const MyUser = User;
+// MyUserはnewで使用可能
+const u = new MyUser();
+// uはUser型を持つ
+console.log(u.name, u.age);

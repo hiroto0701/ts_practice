@@ -337,44 +337,61 @@
 
 /* 5.2 クラスの型 */
 /* 5.2.1 クラス宣言はインスタンスの型を作る */
-// class User {
-//   name: string = "";
-//   age: number = 0;
+// // class User {
+// //   name: string = "";
+// //   age: number = 0;
 
-//   isAdult(): boolean {
-//     return this.age >= 20;
+// //   isAdult(): boolean {
+// //     return this.age >= 20;
+// //   }
+// // }
+// // // 変数inagakiはUser型という型を持っている
+// // const inagaki = new User();
+
+// // // ただしこの挙動はクラス宣言だけ
+// // const User = class {
+// //   name: string = "";
+// //   age: number = 0;
+
+// //   isAdult(): boolean {
+// //     return this.age >= 20;
+// //   }
+// // };
+
+// // // これはOK
+// // const inagaki = new User();
+
+// // // error: 'User' refers to a value, but is being used as a type here. Did you mean 'typeof User'?
+// // const taka: User = new User();
+
+// // 型引数を使うと、型引数を持つ方が生成される
+// class User<T> {
+//   name: string;
+//   #age: number;
+//   readonly data: T;
+
+//   constructor(name: string, age: number, data: T) {
+//     this.name = name;
+//     this.#age = age;
+//     this.data = data;
 //   }
 // }
-// // 変数inagakiはUser型という型を持っている
-// const inagaki = new User();
 
-// // ただしこの挙動はクラス宣言だけ
-// const User = class {
-//   name: string = "";
-//   age: number = 0;
+// const inagaki: User<string> = new User("hiroto", 25, "サッカー好き");
 
-//   isAdult(): boolean {
-//     return this.age >= 20;
-//   }
-// };
 
-// // これはOK
-// const inagaki = new User();
-
-// // error: 'User' refers to a value, but is being used as a type here. Did you mean 'typeof User'?
-// const taka: User = new User();
-
-// 型引数を使うと、型引数を持つ方が生成される
-class User<T> {
-  name: string;
-  #age: number;
-  readonly data: T;
-
-  constructor(name: string, age: number, data: T) {
-    this.name = name;
-    this.#age = age;
-    this.data = data;
-  }
+/* 5.2.2 newシグネチャによるインスタンス化可能性の表現 */
+class User {
+  name: string = "";
+  age: number = 0;
 }
 
-const inagaki: User<string> = new User("hiroto", 25, "サッカー好き");
+// MyUserConstructor型を new () => User のエイリアスとして定義している。
+type MyUserConstructor = new () => User;
+
+// UserはMyConstructor型を持つ
+const MyUser: MyUserConstructor = User;
+// MyUserはnewで使用可能
+const u = new MyUser();
+// uはUser型を持つ
+console.log(u.name, u.age);
