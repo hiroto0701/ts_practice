@@ -310,15 +310,30 @@
 // }
 // const inagaki: User<string> = new User("hiroto", 25, "サッカー好き");
 /* 5.2.2 newシグネチャによるインスタンス化可能性の表現 */
+// class User {
+//   name: string = "";
+//   age: number = 0;
+// }
+// // MyUserConstructor型を new () => User のエイリアスとして定義している。
+// type MyUserConstructor = new () => User;
+// // UserはMyConstructor型を持つ
+// const MyUser: MyUserConstructor = User;
+// // MyUserはnewで使用可能
+// const u = new MyUser();
+// // uはUser型を持つ
+// console.log(u.name, u.age);
+/* 5.2.3 instanceof演算子と型の絞り込み */
 class User {
     constructor() {
         this.name = "";
         this.age = 0;
     }
 }
-// UserはMyConstructor型を持つ
-const MyUser = User;
-// MyUserはnewで使用可能
-const u = new MyUser();
-// uはUser型を持つ
-console.log(u.name, u.age);
+const inagaki = new User();
+console.log(inagaki instanceof User); // true
+console.log({} instanceof User); // false
+const taka = {
+    name: "Takahiro Moriuchi",
+    age: 35,
+};
+console.log(taka instanceof User); // false
