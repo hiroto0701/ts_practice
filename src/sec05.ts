@@ -399,17 +399,107 @@
 
 
 /* 5.2.3 instanceof演算子と型の絞り込み */
+// class User {
+//   name: string = "";
+//   age: number = 0;
+// }
+
+// const inagaki = new User();
+// console.log(inagaki instanceof User); // true
+// console.log({} instanceof User);  // false
+
+// const taka: User = {
+//   name: "Takahiro Moriuchi",
+//   age: 35,
+// };
+// console.log(taka instanceof User);  // false
+
+// type HasAge = {
+//   age: number;
+// }
+
+// class User {
+//   name: string;
+//   age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+// }
+
+// function getPrice(customer: HasAge) {
+//   // Userクラスのインスタンスだった場合に追加の処理を実施
+//   if (customer instanceof User) {
+//     if (customer.name === 'inagaki') {
+//       return 0;
+//     }
+//   }
+//   return customer.age < 18 ? 1000 : 100;
+// }
+
+// const customer1: HasAge = { age: 15 };
+// const customer2: HasAge = { age: 40 };
+// const inagaki = new User('inagaki', 25);
+
+// console.log(getPrice(customer1)); // 1000
+// console.log(getPrice(customer2)); // 1000
+// console.log(getPrice(inagaki));   // 0
+
+
+/* 5.3 クラスの継承 */
+/* 5.3.1 継承（1）子は親の機能を受け継ぐ */
+// class User {
+//   name: string;
+//   #age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.#age = age;
+//   }
+
+//   public isAdult() {
+//     return this.#age >= 20;
+//   }
+// }
+
+// class PremiumUser extends User {
+//   rank: number = 1;
+// }
+
+// const inagaki = new PremiumUser('hiroto', 25);
+// // 継承しているからUser内のフィールドのものにアクセスできる。
+// console.log(inagaki.rank);
+// console.log(inagaki.name);
+// console.log(inagaki.isAdult());
+
+
+/* 5.3.2 継承（2）親の機能を上書きする */
 class User {
-  name: string = "";
-  age: number = 0;
+  name: string;
+  #age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.#age = age;
+  }
+
+  public isAdult(): boolean {
+    return this.#age >= 20;
+  }
 }
 
-const inagaki = new User();
-console.log(inagaki instanceof User); // true
-console.log({} instanceof User);  // false
+class PremiumUser extends User {
+  rank: number = 1;
 
-const taka: User = {
-  name: "Takahiro Moriuchi",
-  age: 35,
-};
-console.log(taka instanceof User);  // false
+  // ここでisAdultを再宣言
+  public isAdult(): boolean {
+    return true;
+  }
+}
+
+const john = new User('John', 10);
+const taro = new PremiumUser('Taro', 18);
+
+console.log(john.isAdult());  // false
+console.log(taro.isAdult());  // true
