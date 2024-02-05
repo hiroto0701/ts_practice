@@ -449,6 +449,32 @@
 
 /* 5.3 クラスの継承 */
 /* 5.3.1 継承（1）子は親の機能を受け継ぐ */
+// class User {
+//   name: string;
+//   #age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.#age = age;
+//   }
+
+//   public isAdult() {
+//     return this.#age >= 20;
+//   }
+// }
+
+// class PremiumUser extends User {
+//   rank: number = 1;
+// }
+
+// const inagaki = new PremiumUser('hiroto', 25);
+// // 継承しているからUser内のフィールドのものにアクセスできる。
+// console.log(inagaki.rank);
+// console.log(inagaki.name);
+// console.log(inagaki.isAdult());
+
+
+/* 5.3.2 継承（2）親の機能を上書きする */
 class User {
   name: string;
   #age: number;
@@ -458,17 +484,22 @@ class User {
     this.#age = age;
   }
 
-  public isAdult() {
+  public isAdult(): boolean {
     return this.#age >= 20;
   }
 }
 
 class PremiumUser extends User {
   rank: number = 1;
+
+  // ここでisAdultを再宣言
+  public isAdult(): boolean {
+    return true;
+  }
 }
 
-const inagaki = new PremiumUser('hiroto', 25);
-// 継承しているからUser内のフィールドのものにアクセスできる。
-console.log(inagaki.rank);
-console.log(inagaki.name);
-console.log(inagaki.isAdult());
+const john = new User('John', 10);
+const taro = new PremiumUser('Taro', 18);
+
+console.log(john.isAdult());  // false
+console.log(taro.isAdult());  // true

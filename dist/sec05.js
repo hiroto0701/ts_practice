@@ -375,6 +375,26 @@ var _User_age;
 // console.log(getPrice(inagaki));   // 0
 /* 5.3 クラスの継承 */
 /* 5.3.1 継承（1）子は親の機能を受け継ぐ */
+// class User {
+//   name: string;
+//   #age: number;
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.#age = age;
+//   }
+//   public isAdult() {
+//     return this.#age >= 20;
+//   }
+// }
+// class PremiumUser extends User {
+//   rank: number = 1;
+// }
+// const inagaki = new PremiumUser('hiroto', 25);
+// // 継承しているからUser内のフィールドのものにアクセスできる。
+// console.log(inagaki.rank);
+// console.log(inagaki.name);
+// console.log(inagaki.isAdult());
+/* 5.3.2 継承（2）親の機能を上書きする */
 class User {
     constructor(name, age) {
         _User_age.set(this, void 0);
@@ -391,8 +411,12 @@ class PremiumUser extends User {
         super(...arguments);
         this.rank = 1;
     }
+    // ここでisAdultを再宣言
+    isAdult() {
+        return true;
+    }
 }
-const inagaki = new PremiumUser('hiroto', 25);
-console.log(inagaki.rank);
-console.log(inagaki.name);
-console.log(inagaki.isAdult());
+const john = new User('John', 10);
+const taro = new PremiumUser('Taro', 18);
+console.log(john.isAdult());
+console.log(taro.isAdult());
