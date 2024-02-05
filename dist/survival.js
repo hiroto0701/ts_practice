@@ -210,12 +210,26 @@
 // };
 // console.table(pikachu);
 /* オブジェクトのループ */
-// for...in
-const foo = {
-    a: 1,
-    b: 2,
-    c: 3,
-};
-for (const item in foo) {
-    console.log(item, foo[item]);
+// // for...in
+// const foo : {
+//   a: number;
+//   b: number;
+//   c: number;
+//   [key: string]: number;
+// } = {
+//   a: 1,
+//   b: 2,
+//   c: 3,
+// };
+// for (const item in foo) {
+//   console.log(item, foo[item]);
+// }
+/* 配列のループ */
+// for-of文
+// 配列の要素をひとつひとつ処理する場合の処理
+const arr = ["a", "b", "c", "d"];
+for (const elem of arr) {
+    console.log(elem);
 }
+const arr2 = arr.map((elem) => elem + elem);
+console.log(arr2);
