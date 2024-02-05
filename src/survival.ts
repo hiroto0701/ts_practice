@@ -238,17 +238,73 @@
 // console.table(pikachu);
 
 /* オブジェクトのループ */
-// for...in
-const foo : {
-  a: number;
-  b: number;
-  c: number;
-  [key: string]: number;
-} = {
-  a: 1,
-  b: 2,
-  c: 3,
-};
-for (const item in foo) {
-  console.log(item, foo[item]);
+// // for...in
+// const foo : {
+//   a: number;
+//   b: number;
+//   c: number;
+//   [key: string]: number;
+// } = {
+//   a: 1,
+//   b: 2,
+//   c: 3,
+// };
+// for (const item in foo) {
+//   console.log(item, foo[item]);
+// }
+
+
+/* 配列のループ */
+// // for-of文
+// // 配列の要素をひとつひとつ処理する場合の処理
+// const arr: string[] = ["a", "b", "c", "d"];
+// for (const elem of arr) {
+//   console.log(elem);
+// }
+
+// const arr2 = arr.map((elem) => elem + elem);
+// console.log(arr2);
+
+
+/* 配列のスプレッド構文 */
+// // スプレッド構文を使わない場合
+// const arr: number[] = [1, 2, 3];
+// const arr2 = [];
+// for (const item of arr) {
+//   arr2.push(item);
+// }
+// arr2.push(4);
+// console.log(arr2);  // 1, 2, 3, 4
+
+// // スプレッド構文を使用する場合
+// const arr3 = [...arr, 4];
+// console.log(arr3);  // 1, 2, 3, 4
+
+
+/* インターフェースを実装する */
+// クラスがインターフェースを実装できる。
+// 実装のためにはimplementsを使用する
+interface Human {
+  think(): void;
+}
+
+class Developer implements Human {
+  think(): void {
+    console.log("どういう実装にしようかな");
+  }
+}
+
+// インターフェースを複数指定することも可能
+interface Programmer {
+  writeCode(): void;
+}
+
+class TypeScriptProgrammer implements Human, Programmer {
+  think(): void {
+    console.log("どういうコードにしようかなー")
+  }
+
+  writeCode(): void {
+    console.log("typeエイリアスとinterfaceの違いは。。。")
+  }
 }

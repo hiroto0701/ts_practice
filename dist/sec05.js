@@ -2,12 +2,6 @@
 /* ==========================
   section5 typescript class
  ========================== */
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var _Department_employees;
 /* 5.1.1 クラスの宣言とnew構文 */
 // class User {
 //   name: string = "";
@@ -230,56 +224,53 @@ var _Department_employees;
 // // taka は User<{ num: number }>型
 // const taka = new User('taka', 35, { num: 123 });
 // const data2 = taka.data;
-/* Udemy 継承 */
-class Department {
-    constructor(id, name) {
-        this.id = id;
-        this.name = name;
-        _Department_employees.set(this, []);
-    }
-    describe() {
-        console.log(`Department (${this.id}): ${this.name}`);
-    }
-    addEmployee(employee) {
-        __classPrivateFieldGet(this, _Department_employees, "f").push(employee);
-    }
-    printEmployeeInformation() {
-        console.log(__classPrivateFieldGet(this, _Department_employees, "f").length);
-        console.log(__classPrivateFieldGet(this, _Department_employees, "f"));
-    }
-}
-_Department_employees = new WeakMap();
-const accounting = new Department('d1', 'Accounting');
-accounting.describe();
-accounting.addEmployee('Taka');
-accounting.printEmployeeInformation();
-// DepartmentクラスをもとにしたItDepartmentクラスを作成
-class ItDepartment extends Department {
-    constructor(id, admins) {
-        // 他のクラスを継承したクラスで新たにコンストラクタを追加する際は
-        // superというキーワードを使って、継承元に情報を渡す必要がある。
-        super(id, 'IT');
-        this.admins = admins;
-    }
-}
-const it = new ItDepartment('d2', ['Max']);
-it.describe();
-it.addEmployee('Taka');
-it.printEmployeeInformation();
-console.table(it);
-class AccountingDepartment extends Department {
-    constructor(id, reports) {
-        super(id, 'Accounting');
-        this.reports = reports;
-    }
-    addReport(text) {
-        this.reports.push(text);
-    }
-    printReport() {
-        console.log(this.reports);
-    }
-}
-const accounting3 = new AccountingDepartment('d2', []);
-accounting3.addReport('Something');
-accounting3.printReport();
-console.table(accounting3);
+// /* Udemy 継承 */
+// class Department {
+//   #employees: Array<string> = [];
+//   constructor(private readonly id: string, public name: string) {}
+//   describe(this: Department) {
+//     console.log(`Department (${this.id}): ${this.name}`);
+//   }
+//   addEmployee(employee: string) {
+//     this.#employees.push(employee);
+//   }
+//   printEmployeeInformation() {
+//     console.log(this.#employees.length);
+//     console.log(this.#employees);
+//   }
+// }
+// const accounting = new Department('d1', 'Accounting');
+// accounting.describe();
+// accounting.addEmployee('Taka');
+// accounting.printEmployeeInformation();
+// // DepartmentクラスをもとにしたItDepartmentクラスを作成
+// class ItDepartment extends Department {
+//   // 特有の処理を記述してなくても継承元のメソッドやプロパティは問題なく使用できる。
+//   admins: string[];
+//   constructor(id: string, admins: string[]) {
+//     // 他のクラスを継承したクラスで新たにコンストラクタを追加する際は
+//     // superというキーワードを使って、継承元に情報を渡す必要がある。
+//     super(id, 'IT');
+//     this.admins = admins;
+//   }
+// }
+// const it = new ItDepartment('d2', ['Max']);
+// it.describe();
+// it.addEmployee('Taka');
+// it.printEmployeeInformation();
+// console.table(it);
+// class AccountingDepartment extends Department {
+//   constructor(id: string, private reports: string[]) {
+//     super(id, 'Accounting');
+//   }
+//   addReport(text: string) {
+//     this.reports.push(text);
+//   }
+//   printReport() {
+//     console.log(this.reports);
+//   }
+// }
+// const accounting3 = new AccountingDepartment('d2', []);
+// accounting3.addReport('Something');
+// accounting3.printReport();
+// console.table(accounting3);
