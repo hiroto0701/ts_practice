@@ -414,34 +414,61 @@
 // };
 // console.log(taka instanceof User);  // false
 
-type HasAge = {
-  age: number;
-}
+// type HasAge = {
+//   age: number;
+// }
 
+// class User {
+//   name: string;
+//   age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+// }
+
+// function getPrice(customer: HasAge) {
+//   // Userクラスのインスタンスだった場合に追加の処理を実施
+//   if (customer instanceof User) {
+//     if (customer.name === 'inagaki') {
+//       return 0;
+//     }
+//   }
+//   return customer.age < 18 ? 1000 : 100;
+// }
+
+// const customer1: HasAge = { age: 15 };
+// const customer2: HasAge = { age: 40 };
+// const inagaki = new User('inagaki', 25);
+
+// console.log(getPrice(customer1)); // 1000
+// console.log(getPrice(customer2)); // 1000
+// console.log(getPrice(inagaki));   // 0
+
+
+/* 5.3 クラスの継承 */
+/* 5.3.1 継承（1）子は親の機能を受け継ぐ */
 class User {
   name: string;
-  age: number;
+  #age: number;
 
   constructor(name: string, age: number) {
     this.name = name;
-    this.age = age;
+    this.#age = age;
+  }
+
+  public isAdult() {
+    return this.#age >= 20;
   }
 }
 
-function getPrice(customer: HasAge) {
-  // Userクラスのインスタンスだった場合に追加の処理を実施
-  if (customer instanceof User) {
-    if (customer.name === 'inagaki') {
-      return 0;
-    }
-  }
-  return customer.age < 18 ? 1000 : 100;
+class PremiumUser extends User {
+  rank: number = 1;
 }
 
-const customer1: HasAge = { age: 15 };
-const customer2: HasAge = { age: 40 };
-const inagaki = new User('inagaki', 25);
-
-console.log(getPrice(customer1)); // 1000
-console.log(getPrice(customer2)); // 1000
-console.log(getPrice(inagaki));   // 0
+const inagaki = new PremiumUser('hiroto', 25);
+// 継承しているからUser内のフィールドのものにアクセスできる。
+console.log(inagaki.rank);
+console.log(inagaki.name);
+console.log(inagaki.isAdult());
