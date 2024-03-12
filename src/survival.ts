@@ -284,59 +284,115 @@
 /* インターフェースを実装する */
 // クラスがインターフェースを実装できる。
 // 実装のためにはimplementsを使用する
-interface Human {
-  think(): void;
-}
+// interface Human {
+//   think(): void;
+// }
 
-class Developer implements Human {
-  think(): void {
-    console.log("どういう実装にしようかな");
-  }
-}
+// class Developer implements Human {
+//   think(): void {
+//     console.log("どういう実装にしようかな");
+//   }
+// }
 
 // インターフェースを複数指定することも可能
-interface Programmer {
-  writeCode(): void;
-}
+// interface Programmer {
+//   writeCode(): void;
+// }
 
-class TypeScriptProgrammer implements Human, Programmer {
-  think(): void {
-    console.log("どういうコードにしようかなー")
-  }
+// class TypeScriptProgrammer implements Human, Programmer {
+//   think(): void {
+//     console.log("どういうコードにしようかなー")
+//   }
 
-  writeCode(): void {
-    console.log("typeエイリアスとinterfaceの違いは。。。")
-  }
-}
+//   writeCode(): void {
+//     console.log("typeエイリアスとinterfaceの違いは。。。")
+//   }
+// }
 
 /* インターフェースのreadonly修飾子 */
-interface SomeInterface {
-  readonly field: number;
-}
+// interface SomeInterface {
+//   readonly field: number;
+// }
 
 /* インターフェースの継承 */
 // extendsを利用して定義済みのインターフェースを継承して、新たにインターフェースを定義することが可能。
-interface Person {
+// interface Person {
+//   name: string;
+//   age: number;
+// }
+
+// interface Student extends Person {
+//   grade: number;
+// }
+
+// interface Teacher extends Person {
+//   students: Student[]; 
+// }
+
+// const studentA: Student = {
+//   name: "花子",
+//   age: 18,
+//   grade: 3
+// };
+
+// const teacher: Teacher = {
+//   name: "田中先生",
+//   age: 30,
+//   students: [studentA],
+// }
+
+/* インターフェースのとtypeエイリアスの違い */
+// 型エイリアスを使用することでインターフェースと同様の定義が可能
+interface Animal {
   name: string;
-  age: number;
+  bark(): string;
 }
 
-interface Student extends Person {
-  grade: number;
+type Animal2 = {  // コンパイルエラー回避のために名称を変更
+  name: string;
+  bark(): string;
 }
 
-interface Teacher extends Person {
-  students: Student[]; 
+// 継承
+// インターフェースはインターフェースや型エイリアスを継承可能
+type Creature = {
+  dna: string;
+}
+interface Dog extends Animal, Creature {
+  dogType: string;
 }
 
-const studentA: Student = {
-  name: "花子",
-  age: 18,
-  grade: 3
-};
+// 型エイリアスは継承できないが、インターセクション型を使用することで似たようなことを実現できる
+type Dog2 = Animal2 &
+  Creature & {
+    dogType: string;
+  };
 
-const teacher: Teacher = {
-  name: "田中先生",
-  age: 30,
-  students: [studentA],
+
+// プロパティのオーバーライド（上書き）
+interface Pet {
+  name: any;
+  price: {
+    yen: number;
+  };
+  legCount: number;
+}
+
+interface Cat extends Pet {
+  name: string;
+  price: {
+    yen: number;
+    dollar: number;
+  };
+}
+
+// 最終的なDogの定義
+// price プロパティが上書きされている
+interface Dog {
+  name: string;
+  price: {
+    yen: number;
+    dollar: number;
+  };
+  legCount: number;
 }
