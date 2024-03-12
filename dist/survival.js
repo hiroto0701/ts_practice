@@ -15,3 +15,13 @@ class TypeScriptProgrammer {
         console.log("typeエイリアスとinterfaceの違いは。。。");
     }
 }
+const studentA = {
+    name: "花子",
+    age: 18,
+    grade: 3
+};
+const teacher = {
+    name: "田中先生",
+    age: 30,
+    students: [studentA],
+};

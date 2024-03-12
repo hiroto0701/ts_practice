@@ -308,3 +308,35 @@ class TypeScriptProgrammer implements Human, Programmer {
     console.log("typeエイリアスとinterfaceの違いは。。。")
   }
 }
+
+/* インターフェースのreadonly修飾子 */
+interface SomeInterface {
+  readonly field: number;
+}
+
+/* インターフェースの継承 */
+// extendsを利用して定義済みのインターフェースを継承して、新たにインターフェースを定義することが可能。
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Student extends Person {
+  grade: number;
+}
+
+interface Teacher extends Person {
+  students: Student[]; 
+}
+
+const studentA: Student = {
+  name: "花子",
+  age: 18,
+  grade: 3
+};
+
+const teacher: Teacher = {
+  name: "田中先生",
+  age: 30,
+  students: [studentA],
+}

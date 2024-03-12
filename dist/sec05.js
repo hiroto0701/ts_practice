@@ -418,5 +418,5 @@ class PremiumUser extends User {
 }
 const john = new User('John', 10);
 const taro = new PremiumUser('Taro', 18);
-console.log(john.isAdult());
-console.log(taro.isAdult());
+console.log(john.isAdult()); // false
+console.log(taro.isAdult()); // true
